@@ -1,10 +1,9 @@
-var http = require('http')
 var express = require('express')
 var twilio = require('twilio')
 
 var app = express()
 
-var PORT = process.env.PORT
+var PORT = 1337
 
 
 app.post('/', function(req, res) {
@@ -15,6 +14,6 @@ app.post('/', function(req, res) {
   res.end(twiml.toString())
 })
 
-http.createServer(app).listen(PORT, function () {
+app.listen(PORT, function () {
   console.log(`Express server listening on port ${PORT}`)
 })
