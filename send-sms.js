@@ -1,14 +1,14 @@
 // Twilio Credentials
-var accountSid = 'AC8531d011f7354e888b1ff5814ede7216';
-var authToken = '25d3020b826467462385f76a53dd9caa';
+var accountSid = 'AC8531d011f7354e888b1ff5814ede7216'
+var authToken = '25d3020b826467462385f76a53dd9caa'
 
 //require the Twilio module and create a REST client
-var client = require('twilio')(accountSid, authToken);
+var client = require('twilio')(accountSid, authToken)
 
 client.messages.create({
     to: "+16268402294",
     from: "+16266583335",
-    body: "This is the ship that made the Kessel Run in fourteen parsecs?",
+    body: "Hey Veronica, sending you this message through the app I'm building.",
 }, function(err, message) {
-    console.log(message.sid);
-});
+    console.log(message.sid)
+})
