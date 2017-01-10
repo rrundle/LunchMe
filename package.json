@@ -1,0 +1,31 @@
+{
+  "name": "LunchMe",
+  "version": "1.0.0",
+  "description": "A text-to-order service for ordering lunch on the go.",
+  "main": "server.js",
+  "scripts": {
+    "watch": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrundle/LunchMe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rrundle/LunchMe/issues"
+  },
+  "homepage": "https://github.com/rrundle/LunchMe#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "ngrok": "^2.2.4",
+    "pg": "^6.1.2",
+    "twilio": "^2.11.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
