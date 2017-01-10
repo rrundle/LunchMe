@@ -7,7 +7,7 @@ var app = express()
 var PORT = process.env.PORT
 
 
-app.post('/sms', function(req, res) {
+app.post('/', function(req, res) {
   var twilio = require('twilio')
   var twiml = new twilio.TwimlResponse()
   twiml.message('The Robots are coming! Head for the hills!')
