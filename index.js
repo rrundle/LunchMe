@@ -3,6 +3,9 @@ var app = express()
 
 var twilio = require('twilio')
 var twiml = new twilio.TwimlResponse()
+var accountSid = 'AC8531d011f7354e888b1ff5814ede7216'
+var authToken = '25d3020b826467462385f76a53dd9caa'
+var client = require('twilio')(accountSid, authToken)
 
 var Postmates = require('postmates')
 var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
@@ -29,24 +32,22 @@ app.post('/sms', function(req, res) {
   postmates.new(delivery, function(err, confirm) {
     console.log(confirm.body)
   })
-  var twilio = require('twilio')
-  var twiml = new twilio.TwimlResponse()
-  twiml.message('Thanks! We got your order!')
+  twiml.message('Thanks! We got your order! We\'ll send you a status update shortly')
   res.writeHead(200, {'Content-Type': 'text/xml'})
   res.end(twiml.toString())
 })
 
 app.post('/postmates', function(req, res) {
-  console.log(req.body)
+  client.messages.create({
+      to: '+16268402294',
+      from: '+16266583335',
+      body: 'Status of order #' + req.body.id + ': ' + req.body.data.status,
+  }, function(err, message) {
+      console.log(message.sid)
+  })
+  console.log(req.body.data.status)
   res.sendStatus(200)
 })
-
-/*
-postmates.get('del_L6L7ACOpWIKS-k', function(err, confirm) {
-  console.log(res.body)
-  res.sendStatus(200)
-})
-*/
 
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
