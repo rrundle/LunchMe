@@ -36,12 +36,17 @@ app.post('/sms', function(req, res) {
   res.end(twiml.toString())
 })
 
-app.post('/postmates', function(err, res) {
-  postmates.get('del_L6L7ACOpWIKS-k', function(err, confirm) {
-    console.log(res.body)
-    res.sendStatus(200)
-  })
+app.post('/postmates', function(req, res) {
+  console.log(req.body)
+  res.sendStatus(200)
 })
+
+/*
+postmates.get('del_L6L7ACOpWIKS-k', function(err, confirm) {
+  console.log(res.body)
+  res.sendStatus(200)
+})
+*/
 
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
