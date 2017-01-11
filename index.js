@@ -11,7 +11,7 @@ var Postmates = require('postmates')
 var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
 
 var bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.urlencoded()
 
 var PORT = 2999
 
@@ -29,15 +29,17 @@ var delivery = {
 app.use(jsonParser)
 
 app.post('/sms', function(req, res) {
+  console.log(req.body.Body)
   postmates.new(delivery, function(err, confirm) {
     console.log(confirm.body)
   })
-  twiml.message('Thanks! We got your order! We\'ll send you a status update shortly')
+  twiml.message('Thanks! We got your order! We\'ll send you a status update shortly.')
   res.writeHead(200, {'Content-Type': 'text/xml'})
   res.end(twiml.toString())
 })
 
 app.post('/postmates', function(req, res) {
+
   client.messages.create({
       to: '+16268402294',
       from: '+16266583335',
@@ -45,6 +47,7 @@ app.post('/postmates', function(req, res) {
   }, function(err, message) {
       console.log(message.sid)
   })
+  
   console.log(req.body.data.status)
   res.sendStatus(200)
 })
