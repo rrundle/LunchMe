@@ -11,12 +11,13 @@ var Postmates = require('postmates')
 var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
 
 var bodyParser = require('body-parser')
-var jsonParser = bodyParser.urlencoded()
+var urlParser = bodyParser.urlencoded()
+var jsonParser = bodyParser.json()
 
 var PORT = 2999
 
 var delivery = {
-  manifest: "a cheese pizza",
+  manifest: "",
   pickup_name: "Pitfire Pizza",
   pickup_address: "353 East 17th Street, Costa Mesa, CA 92627",
   pickup_phone_number: "6268266620",
@@ -26,20 +27,28 @@ var delivery = {
   dropoff_notes: "Front door on the back side"
 }
 
+app.use(urlParser)
 app.use(jsonParser)
 
 app.post('/sms', function(req, res) {
-  console.log(req.body.Body)
-  postmates.new(delivery, function(err, confirm) {
-    console.log(confirm.body)
-  })
-  twiml.message('Thanks! We got your order! We\'ll send you a status update shortly.')
-  res.writeHead(200, {'Content-Type': 'text/xml'})
-  res.end(twiml.toString())
+  if (req.body.Body.toLowerCase() === 'pizza') {
+    delivery.manifest = 'a cheese pizza'
+    postmates.new(delivery, function(err, confirm) {
+      console.log(confirm.body)
+      twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. We\'ll send you a status update shortly.')
+      res.writeHead(200, {'Content-Type': 'text/xml'})
+      res.end(twiml.toString())
+    })
+  }
+  if (req.body.Body.toLowerCase() !== 'pizza') {
+    twiml.message('Sorry we could not process that order.')
+    res.writeHead(200, {'Content-Type': 'text/xml'})
+    res.end(twiml.toString())
+  }
 })
 
 app.post('/postmates', function(req, res) {
-
+  /*
   client.messages.create({
       to: '+16268402294',
       from: '+16266583335',
@@ -47,8 +56,7 @@ app.post('/postmates', function(req, res) {
   }, function(err, message) {
       console.log(message.sid)
   })
-  
-  console.log(req.body.data.status)
+  */
   res.sendStatus(200)
 })
 
