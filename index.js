@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 
 var twilio = require('twilio')
+var twiml = new twilio.TwimlResponse()
 
 var Postmates = require('postmates')
 var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
@@ -9,7 +10,7 @@ var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d92
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
-var PORT = 1337
+var PORT = 2999
 
 var delivery = {
   manifest: "a cheese pizza",
@@ -18,12 +19,16 @@ var delivery = {
   pickup_phone_number: "6268266620",
   dropoff_name: "Ryan",
   dropoff_address: "1206 Las Arenas Way, Costa Mesa, CA 92627",
+  dropoff_phone_number: "6268402294",
   dropoff_notes: "Front door on the back side"
 }
 
 app.use(jsonParser)
 
 app.post('/sms', function(req, res) {
+  postmates.new(delivery, function(err, confirm) {
+    console.log(confirm.body)
+  })
   var twilio = require('twilio')
   var twiml = new twilio.TwimlResponse()
   twiml.message('Thanks! We got your order!')
@@ -31,16 +36,13 @@ app.post('/sms', function(req, res) {
   res.end(twiml.toString())
 })
 
-app.post('/postmates', function(req, res) {
-  console.log(req.body)
-  res.writeHead(200)
+app.post('/postmates', function(err, res) {
+  postmates.get('del_L6L7ACOpWIKS-k', function(err, confirm) {
+    console.log(res.body)
+    res.sendStatus(200)
+  })
 })
 
-app.listen(PORT, function () {
+app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
-})
-
-postmates.new(delivery, function(err, res) {
-  var twiml = new twilio.TwimlResponse()
-  twiml.message('Thanks! We got your order!')
 })
