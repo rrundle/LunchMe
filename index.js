@@ -9,6 +9,8 @@ var client = require('twilio')(accountSid, authToken)
 var Postmates = require('postmates')
 var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
 
+var emoji = require('node-emoji')
+
 var bodyParser = require('body-parser')
 var urlParser = bodyParser.urlencoded()
 var jsonParser = bodyParser.json()
@@ -38,15 +40,11 @@ app.use(urlParser)
 app.use(jsonParser)
 
 app.post('/sms', function(req, res) {
+  var pizza = emoji.get('pizza')
   var textString = req.body.Body
   var space = ' '
   var arrayOfText = textString.split(space)
-  if (arrayOfText[1].toLowerCase() !== 'pizza' || arrayOfText[3].toLowerCase() !== 'pitfire') {
-    var twiml = new twilio.TwimlResponse()
-    cantProcess(res, twiml)
-    return
-  }
-  if (arrayOfText[1].toLowerCase() === 'pizza' && arrayOfText[3].toLowerCase() === 'pitfire') {
+  if ((arrayOfText[1].toLowerCase() === 'pizza' || arrayOfText[1] === pizza) && arrayOfText[3].toLowerCase() === 'pitfire') {
     var manifest = 'large cheese pizza'
     var pickup_name = 'Pitfire Pizza'
     var delivery = makeDelivery(manifest, pickup_name)
@@ -56,6 +54,11 @@ app.post('/sms', function(req, res) {
       res.writeHead(200, {'Content-Type': 'text/xml'})
       res.end(twiml.toString())
     })
+  }
+  else {
+    var twiml = new twilio.TwimlResponse()
+    cantProcess(res, twiml)
+    return
   }
 })
 
