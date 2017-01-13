@@ -120,6 +120,23 @@ var orders = [
   }
 ]
 
+/*
+*To see if emoji exists in my object/array
+*Would need to translat emoji to a string then pass that string to
+*translateEmoji to see if it's true **not sure how to translate emoji
+
+var emoticons = {
+  'emoji.get(pizza)': 'pizza'
+}
+
+function checkEmoji(emoji) {
+  return emoticons[emoji]
+}
+
+var smsEmoji = checkEmoji(arrayOfText[1])
+console.log(smsEmoji)
+ */
+
 function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number) {
   return {
     manifest: manifest,
@@ -146,8 +163,10 @@ app.post('/sms', function(req, res) {
   var textString = req.body.Body
   var space = ' '
   var arrayOfText = textString.split(space)
+  var matches = []
   for (var i = 0; i < orders.length; i++) {
     if (orders[i].emoticon === arrayOfText[1]) {
+      matches.push(orders[i])
       var manifest = orders[i].order
       var pickup_name = orders[i].pickupName
       var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
@@ -160,11 +179,11 @@ app.post('/sms', function(req, res) {
         res.end(twiml.toString())
       })
     }
-    else {
-      var twiml = new twilio.TwimlResponse()
-      cantProcess(res, twiml)
-      return
-    }
+  }
+  if (matches.length === 0) {
+    var twiml = new twilio.TwimlResponse()
+    cantProcess(res, twiml)
+    return
   }
 })
 
@@ -172,7 +191,7 @@ app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',
       from: '+16266583335',
-      body: 'Status of order #' + req.body.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
+      body: 'Status of order #' + req.body.data.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
   }, function(err, message) {
       console.log(message.sid)
   })
