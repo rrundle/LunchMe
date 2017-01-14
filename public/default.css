@@ -1,0 +1,162 @@
+body {
+  font-family: Roboto;
+  background-image: url('http://i.imgur.com/pcRNVdx.png');
+  background-repeat: repeat;
+  color: #324552;
+}
+
+.logo {
+  width: 100%;
+}
+
+#logo {
+  font-family: Luckiest Guy;
+  font-size: 3em;
+  color: #094aa8;
+  margin: auto;
+}
+
+#me {
+  color: black;
+}
+
+#bag {
+  color: blue;
+  width: 50px;
+}
+
+.pitch {
+  padding: 25px 0 50px;
+  margin-left: 250px;
+  margin-right: 250px;
+  font-size: 1.5em;
+}
+
+.setup {
+  top: 0;
+  border: solid 1px #d0d0d0;
+  height: 500px;
+  width: 45%;
+  display: inline-block;
+}
+
+#account-info {
+  width: 50%;
+  min-width: 390px;
+}
+
+#twilio-info {
+  width: 25%
+  min-width: 390px;
+}
+
+#account-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 10px 10px 10px;
+}
+
+.account {
+  float: left;
+}
+
+input {
+  margin: 15px;
+  padding: 15px;
+  width: 150%;
+  font-size: 1em;
+}
+
+#name {
+  float: left;
+  clear: left;
+}
+
+#address {
+  float: left;
+  clear: left;
+}
+
+#city {
+  float: left;
+  clear: left;
+}
+
+#state {
+  float: left;
+  clear: left;
+}
+
+#zip{
+  float: left;
+  clear: left;
+}
+
+#phone-number {
+  height: 60px;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  width: 320px;
+  margin: auto;
+  top: 350px;
+}
+
+.shape {
+  fill: transparent;
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  stroke: #094aa8;
+}
+
+.text {
+  font-size: 22px;
+  letter-spacing: 8px;
+  line-height: 32px;
+  position: relative;
+  top: -48px;
+  text-align: center;
+}
+
+.text:hover {
+  cursor: pointer;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+}
+
+#phone-number:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
+  cursor: pointer;
+}
+
+#phone-text:hover {
+  cursor: text;
+}
+
+.tutorial {
+  border: solid 1px #d0d0d0;
+}
+
+.how-to {
+  display: inline-block;
+}
+
+.legend {
+  border: solid 1px #d0d0d0;
+}
+
+.footer {
+  background-color: #324552;
+}

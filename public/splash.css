@@ -1,0 +1,242 @@
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  }
+
+#background-image {
+  background: url(http://i.imgur.com/snE8dIh.jpg) no-repeat center top fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%vh;
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+#overlay {
+  background-color: #a1a1ac;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  opacity: .85;
+}
+
+#overlay:last-of-type {
+  opacity: .85;
+}
+
+.content {
+  width: 80%;
+  margin: 100px auto 0px auto;
+  position: relative;
+  opacity: 1;
+  height: 100%;
+}
+
+#company {
+  margin: 40px auto 0px auto;
+}
+
+#logo {
+  opacity: 1;
+  width: 24%;
+  margin: 50px auto 0px auto;
+  display: block;
+  min-width: 240px;
+  font-family: Luckiest Guy;
+  color: #094aa8;
+  font-size: 4em;
+}
+
+#tagline {
+  font-size: 3.8em;
+  max-width: 900px;
+  color: #FFFFFF;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 100;
+}
+
+h1 {
+  margin: 10px auto;
+}
+
+#action-container {
+  margin: 12px auto;
+}
+
+#call-action {
+  color: #A1A1AC;
+  font-variant: normal;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  font-size: .9em;
+}
+
+#tagline-container {
+  margin: 35px auto;
+}
+
+.nav-contact {
+  width: 40%;
+  text-align: right;
+  margin: 20px 10px 0px 700px;
+}
+
+.contact {
+  display: inline-block;
+  padding: 20px 7px 0px 7px;
+}
+
+#phone {
+  text-decoration: none;
+  font-family: Source Sans Pro;
+  color: #FFFFFF;
+  font-size: 1.07em;
+  font-weight: 200;
+}
+
+#phone:hover {
+  color: #5373DA;
+}
+
+#email {
+  text-decoration: none;
+  font-family: Source Sans Pro;
+  color: #FFFFFF;
+  font-size: 1.07em;
+  font-weight: 200;
+}
+
+#email:hover {
+  color: #5373DA;
+}
+
+span {
+  padding: 8px;
+}
+
+.request-demo {
+  width: 100%;
+}
+
+#demo-button {
+  width: 150px;
+  background-color: #5373DA;
+  border-radius: 50px;
+  padding: 15px 30px 15px 30px;
+  margin: 50px auto;
+  text-align: center;
+  font-weight: 200;
+  font-size: 1.1em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0,0,0,0);
+}
+
+#demo-button:hover {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: .25s;
+  animation-duration: .25s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  color: #FFFFFF;
+}
+
+@-webkit-keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+#demo-link {
+  text-decoration: none;
+  color: #FFFFFF;
+  margin: 0px auto 0px auto;
+}
+
+.marketing-container {
+  width: 100%;
+  display: inline-block;
+  height: 800px;
+  margin-top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  float: both;
+}
+
+.phones {
+  width: 700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#center-phone {
+  top: 0px;
+  margin: 0px auto;
+  width: 330px;
+  position: absolute;
+  z-index: 3;
+  left: 0px;
+  right: 0px;
+}
+
+#left-phone {
+  width: 310px;
+  left: 23%;
+  transform: translateX(-68%);
+  margin-top: 50px;
+  z-index: 1;
+  position: absolute;
+}
+
+#right-phone {
+  width: 310px;
+  left: 65%;
+  margin-top: 50px;
+  z-index: 1;
+  position: absolute;
+}
+
+#shadow-left {
+  box-shadow: -40px 0px 100px -2px black;
+  left: 28%;
+  top: 50px;
+  z-index: 2;
+  width: 100px;
+  height: 600px;
+  margin: 0 auto;
+  opacity: .6;
+  position: absolute;
+}
+
+#shadow-right {
+  box-shadow: 40px 0px 100px -2px black;
+  left: 58%;
+  top: 50px;
+  z-index: 2;
+  width: 100px;
+  height: 600px;
+  margin: 0 auto;
+  opacity: .6;
+  position: absolute;
+}
