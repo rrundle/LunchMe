@@ -120,23 +120,6 @@ var orders = [
   }
 ]
 
-/*
-*To see if emoji exists in my object/array
-*Would need to translat emoji to a string then pass that string to
-*translateEmoji to see if it's true **not sure how to translate emoji
-
-var emoticons = {
-  'emoji.get(pizza)': 'pizza'
-}
-
-function checkEmoji(emoji) {
-  return emoticons[emoji]
-}
-
-var smsEmoji = checkEmoji(arrayOfText[1])
-console.log(smsEmoji)
- */
-
 function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number) {
   return {
     manifest: manifest,
@@ -158,6 +141,7 @@ function cantProcess(response, twilio) {
 
 app.use(urlParser)
 app.use(jsonParser)
+app.use(express.static('public'))
 
 app.post('/sms', function(req, res) {
   var textString = req.body.Body

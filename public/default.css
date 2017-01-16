@@ -61,7 +61,7 @@ body {
 input {
   margin: 15px;
   padding: 15px;
-  width: 150%;
+  width: 90%;
   font-size: 1em;
 }
 
@@ -130,10 +130,6 @@ input {
   text-align: center;
 }
 
-.text:hover {
-  cursor: pointer;
-}
-
 @keyframes draw {
   0% {
     stroke-dasharray: 140 540;
@@ -150,7 +146,6 @@ input {
 #phone-number:hover .shape {
   -webkit-animation: 0.5s draw linear forwards;
   animation: 0.5s draw linear forwards;
-  cursor: pointer;
 }
 
 #phone-text:hover {
@@ -159,6 +154,7 @@ input {
 
 .tutorial {
   border: solid 1px #d0d0d0;
+  margin-top: 500px;
 }
 
 .how-to {

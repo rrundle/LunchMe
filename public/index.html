@@ -20,12 +20,14 @@
         <div id="account-title">
           Set up your account
         </div>
-        <form class="account" action="index.html" method="post">
-          <input id="name" type="text" name="name" placeholder="First name or full name">
-          <input id="address" type="text" name="address" placeholder="123 Main St Suite 405">
-          <input id="city" type="text" name="city" placeholder="Anytown">
-          <input id="state" type="text" name="state" placeholder="FL">
-          <input id="zip" type="text" name="zip" placeholder="10101">
+        <form name="account" class="account">
+          <input id="name" type="text" name="name" placeholder="First name or full name" required>
+          <input id="address" type="text" name="address" placeholder="123 Main St Suite 405" required>
+          <input id="city" type="text" name="city" placeholder="Anytown" required>
+          <input id="state" type="text" name="state" placeholder="FL" required>
+          <input id="zip" type="text" name="zip" placeholder="10101" required>
+          <input id="phone" type="tel" name="phone" placeholder="5556667777" required>
+          <input id="email" type="email" name="email" placeholder="ilovelunchme@gmail.com" required>
           <input id="submit" type="button" name="submit" value="Submit">
         </form>
       </div>
