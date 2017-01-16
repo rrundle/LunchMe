@@ -2,9 +2,9 @@ var form = document.querySelector('.account')
 
 form.addEventListener('submit', submitForm)
 
-function submitForm(e) {
-  e.preventDefault()
-  var formData = new FormData(e.target)
+function submitForm(event) {
+  event.preventDefault()
+  var formData = new FormData(event.target)
   var data = {
     name: formData.get('name'),
     address: formData.get('address'),
@@ -21,7 +21,7 @@ function submitForm(e) {
 function sendData(data) {
   var options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
     body: JSON.stringify(data)
   }
   var result = fetch('/signup', options)

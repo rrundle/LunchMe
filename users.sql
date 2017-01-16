@@ -1,12 +1,14 @@
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO PUBLIC;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
+
 drop table if exists users;
 create table users (
   id serial,
   username varchar,
-  password varchar,
   name varchar,
   address varchar,
-  apt varchar,
   city varchar,
-  state varchar,
-  zipcode varchar
+  state varchar(2),
+  zipcode int,
+  phone varchar(11)
 );

@@ -15,6 +15,15 @@ var bodyParser = require('body-parser')
 var urlParser = bodyParser.urlencoded()
 var jsonParser = bodyParser.json()
 
+var connex = require('knex')
+var knex = connex({
+  client: 'pg',
+  connection: {
+    user: 'ryanrundle',
+    database: 'lunch-me'
+  }
+})
+
 var PORT = 2999
 
 var orders = [
@@ -143,6 +152,23 @@ app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
 
+//send form data to database and send back success
+app.post('/signup', function(req, res) {
+  var query = knex('users').insert({
+    name: req.body.name,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zipcode: req.body.zip,
+    phone: req.body.phone,
+    username: req.body.email,
+  })
+  query
+  .then((users) => res.json(users))
+  .catch((error) => console.log('Sorry, could not insert that user', error))
+})
+
+//check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
   var textString = req.body.Body
   var space = ' '
@@ -171,6 +197,7 @@ app.post('/sms', function(req, res) {
   }
 })
 
+//webhook for order updates from Postmates
 app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',
@@ -182,6 +209,7 @@ app.post('/postmates', function(req, res) {
   res.sendStatus(200)
 })
 
+//listener for server
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
 })
