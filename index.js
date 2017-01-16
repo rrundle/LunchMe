@@ -168,6 +168,13 @@ app.post('/signup', function(req, res) {
   .catch((error) => console.log('Sorry, could not insert that user', error))
 })
 
+//get data from user db to send to public folder
+app.get('/user', function(req, res) {
+  var query = knex.select().from('users')
+  query
+    .then((users) => res.json(users))
+})
+
 //check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
   var textString = req.body.Body

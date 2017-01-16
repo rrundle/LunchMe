@@ -113,6 +113,12 @@ input {
   top: 350px;
 }
 
+.user {
+  visibility: hidden;
+  position: absolute;
+  top: 300px;
+}
+
 .shape {
   fill: transparent;
   stroke-dasharray: 140 540;

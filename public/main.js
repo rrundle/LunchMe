@@ -1,6 +1,9 @@
 var form = document.querySelector('.account')
 
-form.addEventListener('submit', submitForm)
+function viewSwitch(hide, view) {
+  hide.style.visibility = 'hidden'
+  view.style.visibility = 'visible'
+}
 
 function submitForm(event) {
   event.preventDefault()
@@ -14,11 +17,23 @@ function submitForm(event) {
     phone: formData.get('phone'),
     email: formData.get('email')
   }
+  var name  = document.getElementById('name-results')
+  name.textContent = formData.get('name')
+  var address  = document.getElementById('address-results')
+  address.textContent = formData.get('address')
+  var city  = document.getElementById('city-results')
+  city.textContent = formData.get('city') + ', ' + formData.get('state') + ', ' + formData.get('zip')
+  var phone  = document.getElementById('phone-results')
+  phone.textContent = formData.get('phone')
+  var email  = document.getElementById('email-results')
+  email.textContent = formData.get('email')
   sendData(data)
     .then(result => console.log(result))
 }
 
 function sendData(data) {
+  var inputs = document.querySelector('.account')
+  var user = document.querySelector('.user')
   var options = {
     method: 'POST',
     headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
@@ -26,5 +41,8 @@ function sendData(data) {
   }
   var result = fetch('/signup', options)
     .then(res => res.json())
+    .then(viewSwitch(inputs, user))
   return result
 }
+
+form.addEventListener('submit', submitForm)
