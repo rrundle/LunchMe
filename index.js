@@ -223,6 +223,22 @@ app.post('/postmates', function(req, res) {
   res.sendStatus(200)
 })
 
+//requesting new number for new user
+app.get('/number', function(req, res) {
+  client.availablePhoneNumbers('US').local.list({
+    areaCode: '626'
+  }, function(err, data) {
+    var number = data.availablePhoneNumbers[0]
+    res.json(number.phone_number)
+
+    //client.incomingPhoneNumbers.create({
+    //  phoneNumber: number.phone_number
+  //  }, function(err, purchasedNumber) {
+    //  console.log(purchasedNumber.sid)
+  //  })
+  })
+})
+
 //listener for server
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)

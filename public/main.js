@@ -35,6 +35,10 @@ function submitForm(event) {
   phone.textContent = formData.get('phone')
   var email  = document.getElementById('email-results')
   email.textContent = formData.get('email')
+  var result = fetch('/number')
+  result
+    .then(res => res.json())
+    .then(data => console.log(data))
   sendData(data)
   .then(result => console.log(result))
 }
