@@ -3,13 +3,15 @@
 //login button should be removed (fade out) when submit button is clicked
 //If login enter button is clicked, form is removed and user data is displayed
 
-//next stuff
+//view switching
 var form = document.querySelector('.account')
 
 function viewSwitch(hide, view) {
   hide.style.visibility = 'hidden'
   view.style.visibility = 'visible'
 }
+
+//creating object from signup form, setting contents page on viewSwitch
 
 function submitForm(event) {
   event.preventDefault()
@@ -37,6 +39,8 @@ function submitForm(event) {
   .then(result => console.log(result))
 }
 
+//sending and receiving signup data to database
+
 function sendData(data) {
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
@@ -51,7 +55,25 @@ function sendData(data) {
   return result
 }
 
+//checking email against databse for existing user
+var login = document.getElementById('email-input')
+
+//submits form on click/enter
+
 form.addEventListener('submit', submitForm)
+
+//checks email in database on click
+
+document.addEventListener('click', function(e) {
+  console.log(e.target.id.indexOf('email-button'))
+  if (e.target.id.indexOf('email-button') !== -1) {
+    var result = fetch('/login')
+    result
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch((error) => console.log(error))
+  }
+})
 
 //login box appears when login is clicked
 
@@ -67,7 +89,7 @@ document.addEventListener('click', function(e) {
     loginButton.appendChild(submit)
 
     email.setAttribute('class', 'check-email animated fadeIn')
-    email.textContent = 'Enter you email address: '
+    email.textContent = 'Enter your email address: '
 
     login.setAttribute('class', 'check-email animated fadeIn')
     login.setAttribute('placeholder', 'sallydavis@email.com')

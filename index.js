@@ -161,7 +161,7 @@ app.post('/signup', function(req, res) {
     state: req.body.state,
     zipcode: req.body.zip,
     phone: req.body.phone,
-    username: req.body.email,
+    email: req.body.email,
   })
   query
   .then((users) => res.json(users))
@@ -173,6 +173,13 @@ app.get('/user', function(req, res) {
   var query = knex.select().from('users')
   query
     .then((users) => res.json(users))
+})
+
+//send login email input to db and check for matches
+app.get('/login', function (req, res) {
+  var query = knex.select().from('users')
+  query
+    .then((emails) => {res.json(emails)})
 })
 
 //check incoming sms body, if matches to order Array send order
