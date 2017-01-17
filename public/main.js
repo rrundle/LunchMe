@@ -63,6 +63,24 @@ function emailMatches(array) {
   })
 }
 
+function showUser(user) {
+  var inputs = document.querySelector('.account')
+  var customer = document.querySelector('.user')
+  viewSwitch(inputs, customer)
+  var name  = document.getElementById('name-results')
+  name.textContent = user[0].name
+  var address  = document.getElementById('address-results')
+  address.textContent = user[0].address
+  var city  = document.getElementById('city-results')
+  city.textContent =  user[0].city + ', ' + user[0].state + ', ' + user[0].zip
+  var phone  = document.getElementById('phone-results')
+  phone.textContent = user[0].phone
+  var account = document.getElementById('account-title')
+  account.textContent = ''
+  var success = document.getElementById('success')
+  success.textContent = 'Welcome back! Happy lunching.'
+}
+
 //submits form on click/enter
 
 form.addEventListener('submit', submitForm)
@@ -75,7 +93,15 @@ document.addEventListener('click', function(e) {
     result
       .then(res => res.json())
       .then(data => emailMatches(data))
-      .then(data => console.log(data))
+      .then(match => {
+        if (match.length > 0) {
+          showUser(match)
+          console.log('matches!')
+        }
+        else {
+          console.log('Sorry no matches!')
+        }
+      })
       .catch((error) => console.log(error))
   }
 })
