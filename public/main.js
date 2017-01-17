@@ -81,6 +81,13 @@ function showUser(user) {
   success.textContent = 'Welcome back! Happy lunching.'
 }
 
+function noMatch() {
+  var error = document.createElement('span')
+  var email = document.getElementById('email-button')
+  email.appendChild(error)
+  error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
+}
+
 //submits form on click/enter
 
 form.addEventListener('submit', submitForm)
@@ -99,6 +106,7 @@ document.addEventListener('click', function(e) {
           console.log('matches!')
         }
         else {
+          noMatch()
           console.log('Sorry no matches!')
         }
       })
