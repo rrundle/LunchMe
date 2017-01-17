@@ -15,6 +15,15 @@ var bodyParser = require('body-parser')
 var urlParser = bodyParser.urlencoded()
 var jsonParser = bodyParser.json()
 
+var connex = require('knex')
+var knex = connex({
+  client: 'pg',
+  connection: {
+    user: 'ryanrundle',
+    database: 'lunch-me'
+  }
+})
+
 var PORT = 2999
 
 var orders = [
@@ -120,23 +129,6 @@ var orders = [
   }
 ]
 
-/*
-*To see if emoji exists in my object/array
-*Would need to translat emoji to a string then pass that string to
-*translateEmoji to see if it's true **not sure how to translate emoji
-
-var emoticons = {
-  'emoji.get(pizza)': 'pizza'
-}
-
-function checkEmoji(emoji) {
-  return emoticons[emoji]
-}
-
-var smsEmoji = checkEmoji(arrayOfText[1])
-console.log(smsEmoji)
- */
-
 function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number) {
   return {
     manifest: manifest,
@@ -158,7 +150,32 @@ function cantProcess(response, twilio) {
 
 app.use(urlParser)
 app.use(jsonParser)
+app.use(express.static('public'))
 
+//send form data to database and send back success
+app.post('/signup', function(req, res) {
+  var query = knex('users').insert({
+    name: req.body.name,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zipcode: req.body.zip,
+    phone: req.body.phone,
+    username: req.body.email,
+  })
+  query
+  .then((users) => res.json(users))
+  .catch((error) => console.log('Sorry, could not insert that user', error))
+})
+
+//get data from user db to send to public folder
+app.get('/user', function(req, res) {
+  var query = knex.select().from('users')
+  query
+    .then((users) => res.json(users))
+})
+
+//check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
   var textString = req.body.Body
   var space = ' '
@@ -187,6 +204,7 @@ app.post('/sms', function(req, res) {
   }
 })
 
+//webhook for order updates from Postmates
 app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',
@@ -198,6 +216,7 @@ app.post('/postmates', function(req, res) {
   res.sendStatus(200)
 })
 
+//listener for server
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
 })

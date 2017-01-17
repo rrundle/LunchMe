@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en us">
+  <head>
+    <meta charset="utf-8">
+    <title>LunchMe | Order lunch with a text</title>
+    <link type="text/css" rel="stylesheet" href="default.css">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300" rel="stylesheet">
+    <script src="https://use.fontawesome.com/7fdda3cfec.js"></script>
+  </head>
+  <body>
+    <div class="logo">
+      <span id="logo">Lunch<span id="me">Me</span></span>
+      <span id="lunch-bag"><img id="bag" src="http://i.imgur.com/MW5oYYA.png"></span>
+    </div>
+    <div class="pitch">
+      Some stuff about what LunchMe does.
+    </div>
+    <div class="content">
+      <div class="setup" id="account-info">
+        <div id="account-title">
+          Set up your account
+        </div>
+        <form name="account" class="account">
+          <input id="name" type="text" name="name" placeholder="First name or full name" required>
+          <input id="address" type="text" name="address" placeholder="123 Main St Suite 405" required>
+          <input id="city" type="text" name="city" placeholder="Anytown" required>
+          <input id="state" type="text" name="state" placeholder="FL" required>
+          <input id="zip" type="text" name="zip" placeholder="10101" required>
+          <input id="phone" type="tel" name="phone" placeholder="5556667777" required>
+          <input id="email" type="email" name="email" placeholder="ilovelunchme@gmail.com" required>
+          <input id="submit" type="submit" name="submit" value="Submit">
+        </form>
+        <div class="user">
+          <div id="success">Success! You are npw ready to start using LunchMe!
+            <br>
+            See below for how to place an order.
+          </div>
+          <div id="name-results"></div>
+          <div id="address-results"></div>
+          <div id="city-results"></div>
+          <div id="phone-results"></div>
+          <div id="email-results"></div>
+        </div>
+      </div>
+      <div class="setup" id="twilio-info">
+        <div id="phone-title">
+          Your <span id="text-to">text-to</span> number
+        </div>
+        <div class="svg-wrapper" id="phone-number">
+          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect class="shape" height="60" width="320" />
+          </svg>
+          <div class="text" id="phone-text">626.658.335</div>
+        </div>
+      </div>
+      <div class="tutorial">
+        <div id="order">
+          How to order
+        </div>
+        <div class="how-to" id="step-1">
+          <div id="instructions-1">
+            <div id="how-1">
+              <ul>
+                <li>Send a text to your <span>text-to</span> phone number with the following sytax:</li>
+                <li>Order 🍕</li>
+              </ul>
+            </div>
+            <img src="http://i.imgur.com/tMWpELW.png"/>
+          </div>
+        </div>
+        <div class="how-to" id="step-2">
+          <div id="instructions-2">
+            <div id="how-2">
+              <ul>
+                <li>An order is placed based on the emoji legend below 👇.</li>
+                <li>You'll get a text confirmation that the order was placed.</li>
+                <li>You'll also get delivery updates as they change.</li>
+                <li>You also may have a courier contact you to clarify details in your order.</li>
+              </ul>
+            </div>
+            <img src="http://i.imgur.com/9tsiGGP.png"/>
+          </div>
+        </div>
+        <div class="how-to" id="step-3">
+          <div id="instructions-3">
+            <div id="how-3">
+              Answer door. Devour food. Rinse 💦 and repeat.
+            </div>
+            <img id="pizza" src="http://i.imgur.com/h14Rx2u.jpg"/>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <table>
+          <tr>
+            <th scope="col">Emoji</th>
+            <th scope="col">Location</th>
+            <th scope="col">Order</th>
+          </tr>
+          <tr>
+            <td>🍕</td>
+            <td>Sgt. Pepperonis Pizza</td>
+            <td>Large cheese pizza</td>
+          </tr>
+          <tr>
+            <td>🐼</td>
+            <td>Panda Express</td>
+            <td>2 item combo, all chow mein, orange chicken, honey walnut shrimp</td>
+          </tr>
+          <tr>
+            <td>🐔</td>
+            <td>Chick-Fila-A</td>
+            <td>Spicy chicken sandwich meal, coke</td>
+          </tr>
+          <tr>
+            <td>🍔</td>
+            <td>In-N-Out</td>
+            <td>#1 plain, large coke</td>
+          </tr>
+          <tr>
+            <td>🌯</td>
+            <td>Chipotle</td>
+            <td>Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke'</td>
+          </tr>
+          <tr>
+            <td>🍣</td>
+            <td>Ten Asian Bistro</td>
+            <td>Dragon roll, shrimp tempura roll - large</td>
+          </tr>
+          <tr>
+            <td>🍱</td>
+            <td>Tokio Grill</td>
+            <td>Teriyaki chicken bento, miso soup, bottled water</td>
+          </tr>
+          <tr>
+            <td>🇻🇳</td>
+            <td>Pho Ba Co</td>
+            <td>Charbroiled beef pho, spring rolls</td>
+          </tr>
+          <tr>
+            <td>❤️</td>
+            <td>Ikes Love &amp; Sandwiches</td>
+            <td>Little mermaid on dutch crunch, no lettuce or tomatoes</td>
+          </tr>
+          <tr>
+            <td>💊</td>
+            <td>CVS Pharmacy</td>
+            <td>Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

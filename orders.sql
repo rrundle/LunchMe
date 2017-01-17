@@ -7,5 +7,5 @@ create table orders (
   order_price varchar,
   order_vendor varchar,
   order_item varchar,
-  order_time timestamp
+  order_time timestamp default current_timestamp
 );
