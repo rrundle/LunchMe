@@ -55,8 +55,13 @@ function sendData(data) {
   return result
 }
 
-//checking email against databse for existing user
-var login = document.getElementById('email-input')
+//checking email against return array for existing user
+function emailMatches(array) {
+  var input = document.getElementById('email-input')
+  return array.filter(function(person) {
+    return person.email === input.value
+  })
+}
 
 //submits form on click/enter
 
@@ -65,12 +70,12 @@ form.addEventListener('submit', submitForm)
 //checks email in database on click
 
 document.addEventListener('click', function(e) {
-  console.log(e.target.id.indexOf('email-button'))
   if (e.target.id.indexOf('email-button') !== -1) {
     var result = fetch('/login')
     result
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(data => emailMatches(data))
+      .then(data => console.log(data))
       .catch((error) => console.log(error))
   }
 })
