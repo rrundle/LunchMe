@@ -4,7 +4,7 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO PUBLIC;
 drop table if exists users;
 create table users (
   id serial,
-  username varchar,
+  email varchar,
   name varchar,
   address varchar,
   city varchar,

@@ -42,13 +42,21 @@ body {
 
 #logo {
   opacity: 1;
-  width: 24%;
+  width: 28%;
   margin: 50px auto 0px auto;
   display: block;
   min-width: 240px;
   font-family: Luckiest Guy;
   color: #094aa8;
   font-size: 4em;
+}
+
+#me {
+  color: black;
+}
+
+#bag {
+  width: 75px;
 }
 
 #tagline {
@@ -69,12 +77,12 @@ h1 {
 }
 
 #call-action {
-  color: #A1A1AC;
+  color: #324552;
   font-variant: normal;
   margin: auto;
   width: 100%;
   text-align: center;
-  font-size: .9em;
+  font-size: 2.2em;
 }
 
 #tagline-container {
@@ -124,12 +132,11 @@ span {
   width: 100%;
 }
 
-#demo-button {
+.button {
   width: 150px;
-  background-color: #5373DA;
-  border-radius: 50px;
+  border-radius: 5px;
+  background-color: #180a49;
   padding: 15px 30px 15px 30px;
-  margin: 50px auto;
   text-align: center;
   font-weight: 200;
   font-size: 1.1em;
@@ -137,9 +144,15 @@ span {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
   box-shadow: 0 0 1px rgba(0,0,0,0);
+  display: inline-block;
+  margin-top: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
+  text-decoration: none;
+  color: #FFFFFF;
 }
 
-#demo-button:hover {
+.button:hover {
   -webkit-animation-name: pulse;
   animation-name: pulse;
   -webkit-animation-duration: .25s;
@@ -147,6 +160,7 @@ span {
   -webkit-animation-timing-function: linear;
   animation-timing-function: linear;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 @-webkit-keyframes pulse {
@@ -164,10 +178,8 @@ span {
   }
 }
 
-#demo-link {
-  text-decoration: none;
-  color: #FFFFFF;
-  margin: 0px auto 0px auto;
+#login {
+  background-color: #5373DA;
 }
 
 .marketing-container {
