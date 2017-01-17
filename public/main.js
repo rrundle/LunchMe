@@ -1,3 +1,8 @@
+//Create login box above twilio number that has existing box
+//for input that is creatd on click and fades in with animation
+//login button should be removed (fade out) when submit button is clicked
+//If login enter button is clicked, form is removed and user data is displayed
+
 var form = document.querySelector('.account')
 
 function viewSwitch(hide, view) {
