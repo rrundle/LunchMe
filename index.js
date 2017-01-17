@@ -19,113 +19,130 @@ var PORT = 2999
 
 var orders = [
   {
-    emoticon: 'pizza',
-    manifest: 'Large cheese pizza',
-    pickup_name: 'Sgt. Pepperonis Pizza',
+    emoticon: emoji.get('pizza'),
+    order: 'Large cheese pizza',
+    pickupName: 'Sgt. Pepperonis Pizza',
     order_address: '2300 SE Bristol St #F',
     order_city: 'Newport Beach',
     order_state: 'CA',
     order_zip: '92660',
-    pickup_phone_number: '949-852-9500'
+    pickupPhone: '949-852-9500'
   },
   {
-    emoticon: 'panda_face',
-    manifest: '2 item combo, all chow mein, orange chicken, honey walnut shrimp',
-    pickup_name: 'Panda Express',
+    emoticon: emoji.get('panda_face'),
+    order: '2 item combo, all chow mein, orange chicken, honey walnut shrimp',
+    pickupName: 'Panda Express',
     order_address: '13266 Jamboree Rd',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92602',
-    pickup_phone_number: '714-669-0752'
+    pickupPhone: '714-669-0752'
   },
   {
-    emoticon: 'chicken',
-    manifest: 'Spicy chicken sandwich meal, coke',
-    pickup_name: 'Chick-Fil-A',
+    emoticon: emoji.get('chicken'),
+    order: 'Spicy chicken sandwich meal, coke',
+    pickupName: 'Chick-Fil-A',
     order_address: '4127 Campus Dr',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92612',
-    pickup_phone_number: '949-725-0230'
+    pickupPhone: '949-725-0230'
   },
   {
-    emoticon: 'hamburger',
-    manifest: '#1 plain, large coke',
-    pickup_name: 'In-N-Out',
+    emoticon: emoji.get('hamburger'),
+    order: '#1 plain, large coke',
+    pickupName: 'In-N-Out',
     order_address: '4115 Campus Dr',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92612',
-    pickup_phone_number: '800-786-1000'
+    pickupPhone: '800-786-1000'
   },
   {
-    emoticon: 'burrito',
-    manifest: 'Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke',
-    pickup_name: 'Chipotle',
+    emoticon: emoji.get('burrito'),
+    order: 'Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke',
+    pickupName: 'Chipotle',
     order_address: '4225 Campus Dr Suite A 116',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92612',
-    pickup_phone_number: '949-242-3737'
+    pickupPhone: '949-242-3737'
   },
   {
-    emoticon: 'sushi',
-    manifest: 'Dragon roll, shrimp tempura roll - large',
-    pickup_name: 'Ten Asian Bistro',
+    emoticon: emoji.get('sushi'),
+    order: 'Dragon roll, shrimp tempura roll - large',
+    pickupName: 'Ten Asian Bistro',
     order_address: '4647 MacArthur Blvd',
     order_city: 'Newport Beach',
     order_state: 'CA',
     order_zip: '92660',
-    pickup_phone_number: '949-660-1010'
+    pickupPhone: '949-660-1010'
   },
   {
-    emoticon: 'bento',
-    manifest: 'Teriyaki chicken bento, miso soup, bottled water',
-    pickup_name: 'Tokio Grill',
+    emoticon: emoji.get('bento'),
+    order: 'Teriyaki chicken bento, miso soup, bottled water',
+    pickupName: 'Tokio Grill',
     order_address: '17915 MacArthur Blvd',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92614',
-    pickup_phone_number: '949-724-1453'
+    pickupPhone: '949-724-1453'
   },
   {
-    emoticon: 'flag-vn',
-    manifest: 'Charbroiled beef pho, spring rolls',
-    pickup_name: 'Pho Ba Co',
+    emoticon: emoji.get('flag-vn'),
+    order: 'Charbroiled beef pho, spring rolls',
+    pickupName: 'Pho Ba Co',
     order_address: '4250 Barranca Pkwy Suite K',
     order_city: 'Irvine',
     order_state: 'CA',
     order_zip: '92604',
-    pickup_phone_number: '949-857-8808'
+    pickupPhone: '949-857-8808'
   },
   {
-    emoticon: 'hearts',
-    manifest: 'Little mermaid on dutch crunch, no lettuce or tomatoes',
-    pickup_name: 'Ikes Love & Sandwiches',
+    emoticon: emoji.get('hearts'),
+    order: 'Little mermaid on dutch crunch, no lettuce or tomatoes',
+    pickupName: 'Ikes Love & Sandwiches',
     order_address: '4221 MacArthur Blvd',
     order_city: 'Newport Beach',
     order_state: 'CA',
     order_zip: '92660',
-    pickup_phone_number: '949-783-3390'
+    pickupPhone: '949-783-3390'
   },
   {
-    emoticon: 'pill',
-    manifest: 'Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars',
-    pickup_name: 'CVS Pharmacy',
+    emoticon: emoji.get('pill'),
+    order: 'Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars',
+    pickupName: 'CVS Pharmacy',
     order_address: '2521 Eastbluff Dr',
     order_city: 'Newport Beach',
     order_state: 'CA',
     order_zip: '92660',
-    pickup_phone_number: '949-717-6642'
+    pickupPhone: '949-717-6642'
   }
 ]
 
-function makeDelivery(manifest, pickup_name) {
+/*
+*To see if emoji exists in my object/array
+*Would need to translat emoji to a string then pass that string to
+*translateEmoji to see if it's true **not sure how to translate emoji
+
+var emoticons = {
+  'emoji.get(pizza)': 'pizza'
+}
+
+function checkEmoji(emoji) {
+  return emoticons[emoji]
+}
+
+var smsEmoji = checkEmoji(arrayOfText[1])
+console.log(smsEmoji)
+ */
+
+function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number) {
   return {
     manifest: manifest,
     pickup_name: pickup_name,
-    pickup_address: "353 East 17th Street, Costa Mesa, CA 92627",
-    pickup_phone_number: "6268266620",
+    pickup_address: pickup_address,
+    pickup_phone_number: pickup_phone_number,
     dropoff_name: "Ryan",
     dropoff_address: "1206 Las Arenas Way, Costa Mesa, CA 92627",
     dropoff_phone_number: "6268402294",
@@ -143,22 +160,27 @@ app.use(urlParser)
 app.use(jsonParser)
 
 app.post('/sms', function(req, res) {
-  var pizza = emoji.get('pizza')
   var textString = req.body.Body
   var space = ' '
   var arrayOfText = textString.split(space)
-  if ((arrayOfText[1].toLowerCase() === 'pizza' || arrayOfText[1] === pizza) && arrayOfText[3].toLowerCase() === 'pitfire') {
-    var manifest = 'large cheese pizza'
-    var pickup_name = 'Pitfire Pizza'
-    var delivery = makeDelivery(manifest, pickup_name)
-    postmates.new(delivery, function(err, confirm) {
-      var twiml = new twilio.TwimlResponse()
-      twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
-      res.writeHead(200, {'Content-Type': 'text/xml'})
-      res.end(twiml.toString())
-    })
+  var matches = []
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].emoticon === arrayOfText[1]) {
+      matches.push(orders[i])
+      var manifest = orders[i].order
+      var pickup_name = orders[i].pickupName
+      var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
+      var pickup_phone_number = orders[i].pickupPhone
+      var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number)
+      postmates.new(delivery, function(err, confirm) {
+        var twiml = new twilio.TwimlResponse()
+        twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
+        res.writeHead(200, {'Content-Type': 'text/xml'})
+        res.end(twiml.toString())
+      })
+    }
   }
-  else {
+  if (matches.length === 0) {
     var twiml = new twilio.TwimlResponse()
     cantProcess(res, twiml)
     return
@@ -169,7 +191,7 @@ app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',
       from: '+16266583335',
-      body: 'Status of order #' + req.body.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
+      body: 'Status of order #' + req.body.data.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
   }, function(err, message) {
       console.log(message.sid)
   })
