@@ -194,3 +194,37 @@ input {
 .footer {
   background-color: #324552;
 }
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+#email-button {
+  height: 50px;
+  width: 100px;
+}
+
+#email-input {
+  width: 300px;
+}

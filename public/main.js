@@ -3,6 +3,7 @@
 //login button should be removed (fade out) when submit button is clicked
 //If login enter button is clicked, form is removed and user data is displayed
 
+//next stuff
 var form = document.querySelector('.account')
 
 function viewSwitch(hide, view) {
@@ -51,3 +52,29 @@ function sendData(data) {
 }
 
 form.addEventListener('submit', submitForm)
+
+//login box appears when login is clicked
+
+document.addEventListener('click', function(e) {
+  if (e.target.id.indexOf('login-button') !== -1) {
+    var loginButton = document.getElementById('login-button')
+    var email = document.createElement('div')
+    var login = document.createElement('input')
+    var submit = document.createElement('span')
+
+    loginButton.appendChild(email)
+    loginButton.appendChild(login)
+    loginButton.appendChild(submit)
+
+    email.setAttribute('class', 'check-email animated fadeIn')
+    email.textContent = 'Enter you email address: '
+
+    login.setAttribute('class', 'check-email animated fadeIn')
+    login.setAttribute('placeholder', 'sallydavis@email.com')
+    login.setAttribute('id', 'email-input')
+
+    submit.setAttribute('class', 'check-email animated fadeIn')
+    submit.setAttribute('id', 'email-button')
+    submit.textContent = 'Submit'
+  }
+})
