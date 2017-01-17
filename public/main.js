@@ -103,11 +103,9 @@ document.addEventListener('click', function(e) {
       .then(match => {
         if (match.length > 0) {
           showUser(match)
-          console.log('matches!')
         }
         else {
           noMatch()
-          console.log('Sorry no matches!')
         }
       })
       .catch((error) => console.log(error))
