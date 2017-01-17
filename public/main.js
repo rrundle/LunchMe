@@ -28,7 +28,7 @@ function submitForm(event) {
   var email  = document.getElementById('email-results')
   email.textContent = formData.get('email')
   sendData(data)
-    .then(result => console.log(result))
+  .then(result => console.log(result))
 }
 
 function sendData(data) {
