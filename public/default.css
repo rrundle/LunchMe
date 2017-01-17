@@ -37,11 +37,24 @@ body {
 }
 
 .setup {
-  top: 0;
   border: solid 1px #d0d0d0;
   height: 500px;
   width: 45%;
   display: inline-block;
+}
+
+.login {
+  height: 200px;
+}
+
+#login-button {
+  width: 150px;
+  height: 50px;
+  border: solid 1px #d0d0d0
+}
+
+#login-button:hover {
+  cursor: pointer;
 }
 
 #account-info {
@@ -103,6 +116,12 @@ input {
 #twilio-info {
   width: 25%
   min-width: 390px;
+  height: 250px;
+  float: right;
+  position: absolute;
+  top: 400px;
+  display: block;
+  left: 50%;
 }
 
 #phone-number {
