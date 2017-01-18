@@ -179,9 +179,10 @@ app.post('/twilio', function(req, res) {
     .update({
       twilio: req.body.twilio
     })
+    .returning('twilio')
   query
-    .then((users) => res.json(users))
-    .then((array) => console.log(array))
+    .then((number) => res.json(number))
+    .then((twil) => console.log(twil))
     .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
 })
 

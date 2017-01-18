@@ -52,7 +52,6 @@ function submitForm(event) {
 //display number on screen and push to database
 function registerNumber(response) {
   var name  = document.getElementById('name-results')
-  console.log(name.textContent)
   var data = {
     name: name.textContent,
     twilio: response,
@@ -74,6 +73,15 @@ function sendData(data) {
   return result
 }
 
+function displayTwilio(number) {
+  var phone = document.getElementById('phone-text')
+  phone.textContent = number
+  var generate = document.getElementById('generate')
+  var twilio = document.getElementById('phone-text')
+  twilio.setAttribute('class', 'text shape')
+  viewSwitch(generate, twilio)
+}
+
 function sendNumber(data) {
   var options = {
     method: 'POST',
@@ -82,7 +90,7 @@ function sendNumber(data) {
   }
   var result = fetch('/twilio', options)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => displayTwilio(data))
   return result
 }
 
