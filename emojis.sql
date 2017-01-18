@@ -1,7 +1,9 @@
 drop table if exists emojis;
 create table emojis (
+  emoji_id serial,
+  id varchar,
   emoji varchar,
-  value varchar,
+  manifest varchar,
   restaurant varchar,
   res_address varchar,
   res_city varchar,
