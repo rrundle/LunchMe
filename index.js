@@ -162,7 +162,6 @@ app.post('/signup', function(req, res) {
     zipcode: req.body.zip,
     phone: req.body.phone,
     email: req.body.email,
-    twilio: req.body.twilio
   })
   query
   .then((users) => res.json(users))
@@ -171,14 +170,18 @@ app.post('/signup', function(req, res) {
 
 //send twilio number to database
 app.post('/twilio', function(req, res) {
+  console.log(req.body.twilio)
   console.log(req.body.name)
-  var query = knex('users').insert({
-    twilio: req.body.twilio
-  })
-    .where('name', req.body.name)
+  var query = knex('users')
+    .where({
+      name: req.body.name
+    })
+    .update({
+      twilio: req.body.twilio
+    })
   query
     .then((users) => res.json(users))
-    .then((table) => console.log(table))
+    .then((array) => console.log(array))
     .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
 })
 

@@ -44,15 +44,20 @@ function submitForm(event) {
   sendData(data)
     .then(result => console.log(result))
 
-  var result = fetch('/number')
-  result
-    .then(res => res.json())
-    .then(data => registerNumber(data))
-    .then(number => console.log(number))
-
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
   viewSwitch(inputs, user)
+}
+
+//display number on screen and push to database
+function registerNumber(response) {
+  var name  = document.getElementById('name-results')
+  console.log(name.textContent)
+  var data = {
+    name: name.textContent,
+    twilio: response,
+  }
+  sendNumber(data)
 }
 
 //sending and receiving signup data to database
@@ -114,17 +119,6 @@ function noMatch() {
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
 
-//display number on screen and push to database
-function registerNumber(response) {
-  var name  = document.getElementById('name')
-  console.log(name.value)
-  var data = {
-    name: name.value,
-    twilio: response,
-  }
-  sendNumber(data)
-}
-
 //submits form on click/enter
 
 form.addEventListener('submit', submitForm)
@@ -175,4 +169,11 @@ document.addEventListener('click', function(e) {
   }
 })
 
-document.addEventListener
+document.addEventListener('click', function(e) {
+  if (e.target.id.indexOf('generate') !== -1) {
+    var result = fetch('/number')
+    result
+      .then(res => res.json())
+      .then(data => registerNumber(data))
+  }
+})
