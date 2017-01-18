@@ -129,16 +129,15 @@ var orders = [
   }
 ]
 
-function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number) {
+function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number) {
   return {
     manifest: manifest,
     pickup_name: pickup_name,
     pickup_address: pickup_address,
     pickup_phone_number: pickup_phone_number,
-    dropoff_name: "Ryan",
-    dropoff_address: "1206 Las Arenas Way, Costa Mesa, CA 92627",
-    dropoff_phone_number: "6268402294",
-    dropoff_notes: "Front door on the back side"
+    dropoff_name: dropoff_name,
+    dropoff_address: dropoff_address,
+    dropoff_phone_number: dropoff_phone_number
   }
 }
 
@@ -148,24 +147,81 @@ function cantProcess(response, twilio) {
   response.end(twilio.toString())
 }
 
+function setOrder(array, obj, res) {
+  console.log(obj)
+  var textString = obj.Body
+  var space = ' '
+  var arrayOfText = textString.split(space)
+  var matches = []
+  for (var i = 0; i < orders.length; i++) {
+    if (orders[i].emoticon === arrayOfText[1]) {
+
+      matches.push(orders[i])
+      var manifest = orders[i].order
+      var pickup_name = orders[i].pickupName
+      var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
+      var pickup_phone_number = orders[i].pickupPhone
+
+      var dropoff_name = array[0].name
+      var dropoff_address = array[0].address + ', ' + array[0].city + ', ' + array[0].state + ', ' + array[0].zipcode
+      var dropoff_phone_number = array[0].phone
+
+      var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
+      postmates.new(delivery, function(err, confirm) {
+        var twiml = new twilio.TwimlResponse()
+        twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
+        res.writeHead(200, {'Content-Type': 'text/xml'})
+        res.end(twiml.toString())
+      })
+    }
+    if (matches.length === 0) {
+      var twiml = new twilio.TwimlResponse()
+      cantProcess(res, twiml)
+      return
+    }
+  }
+  }
+
 app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
 
 //send form data to database and send back success
 app.post('/signup', function(req, res) {
-  var query = knex('users').insert({
-    name: req.body.name,
-    address: req.body.address,
-    city: req.body.city,
-    state: req.body.state,
-    zipcode: req.body.zip,
-    phone: req.body.phone,
-    email: req.body.email,
-  })
+  var query = knex('users')
+    .insert({
+      name: req.body.name,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zip,
+      phone: req.body.phone,
+      email: req.body.email,
+    })
   query
-  .then((users) => res.json(users))
-  .catch((error) => console.log('Sorry, could not insert that user', error))
+    .then((users) => res.json(users))
+    .catch((error) => console.log('Sorry, could not insert that user', error))
+})
+
+app.post('/preferences', function(req, res) {
+  console.log(req.body)
+  var query = knex('emojis')
+    .insert({
+      id: req.body.id,
+      peps_manifest: req.body.peps_manifest,
+      panda_manifest: req.body.panda_manifest,
+      fila_manifest: req.body.fila_manifest,
+      innout_manifest: req.body.innout_manifest,
+      chipotle_manifest: req.body.chipotle_manifest,
+      ten_manifest: req.body.ten_manifest,
+      tokio_manifest: req.body.tokio_manifest,
+      pho_manifest: req.body.pho_manifest,
+      ikes_manifest: req.body.ikes_manifest,
+      cvs_manifest: req.body.cvs_manifest
+    })
+  query
+    .then(emoji => res.json(emoji))
+    .catch(error => console.log(error))
 })
 
 //send twilio number to database
@@ -188,31 +244,47 @@ app.post('/twilio', function(req, res) {
 
 //get data from user db to send to public folder
 app.get('/user', function(req, res) {
-  var query = knex.select().from('users')
+  var query = knex
+    .select()
+    .from('users')
   query
     .then((users) => res.json(users))
 })
 
 //send login email input to db and check for matches
 app.get('/login', function (req, res) {
-  var query = knex.select().from('users')
+  var query = knex
+    .select()
+    .from('users')
   query
     .then((emails) => {res.json(emails)})
 })
 
 //check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
+  var query = knex
+    .where({
+      'twilio': req.body.To
+    })
+    .select()
+    .from('users')
+  query
+    .then(result => console.log(result))
+    .then(data => setOrder(data, req.body, res))
+    .catch(err => console.log(err))
+/*
   var textString = req.body.Body
   var space = ' '
   var arrayOfText = textString.split(space)
   var matches = []
   for (var i = 0; i < orders.length; i++) {
     if (orders[i].emoticon === arrayOfText[1]) {
-      matches.push(orders[i])
-      var manifest = orders[i].order
-      var pickup_name = orders[i].pickupName
-      var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
-      var pickup_phone_number = orders[i].pickupPhone
+      //matches.push(orders[i])
+      //var manifest = orders[i].order
+      //var pickup_name = orders[i].pickupName
+      //var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
+      //var pickup_phone_number = orders[i].pickupPhone
+
       var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number)
       postmates.new(delivery, function(err, confirm) {
         var twiml = new twilio.TwimlResponse()
@@ -227,9 +299,11 @@ app.post('/sms', function(req, res) {
     cantProcess(res, twiml)
     return
   }
+  */
 })
 
 //webhook for order updates from Postmates
+
 app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',

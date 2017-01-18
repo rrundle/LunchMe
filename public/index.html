@@ -36,6 +36,7 @@
             <br>
             Now generate your unique 'text-to' number 👉 .
           </div>
+          <span id="id"></span>
           <div id="name-results"></div>
           <div id="address-results"></div>
           <div id="city-results"></div>
@@ -105,59 +106,57 @@
               <th scope="col">Order</th>
             </tr>
             <tr>
-              <td>🍕</td>
-              <td>Sgt. Pepperonis Pizza</td>
-              <td><input id="sgt-peps" type="text" name="order" value=""></td>
+              <td class="legend-emoji" id="legend-pizza">🍕</td>
+              <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
+              <td><input id="sgt-peps" type="text" name="pizza" value=""></td>
             </tr>
             <tr>
-              <td>🐼</td>
-              <td>Panda Express</td>
+              <td class="legend-emoji" id="legend-panda">🐼</td>
+              <td class="legend-res" id="legend-express">Panda Express</td>
               <td><input id="panda" type="text" name="panda" value=""></td>
             </tr>
             <tr>
-              <td>🐔</td>
-              <td>Chick-Fila-A</td>
+              <td class="legend-emoji" id="legend-chicken">🐔</td>
+              <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
               <td><input id="chicken" type="text" name="chicken" value=""></td>
             </tr>
             <tr>
-              <td>🍔</td>
-              <td>In-N-Out</td>
+              <td class="legend-emoji" id="legend-burger">🍔</td>
+              <td class="legend-res" id="legend-innout">In-N-Out</td>
               <td><input id="burger" type="text" name="burger" value=""></td>
             </tr>
             <tr>
-              <td>🌯</td>
-              <td>Chipotle</td>
+              <td class="legend-emoji" id="legend-burrito">🌯</td>
+              <td class="legend-res" id="legend-chipotle">Chipotle</td>
               <td><input id="burrito" type="text" name="burrito" value=""></td>
             </tr>
             <tr>
-              <td>🍣</td>
-              <td>Ten Asian Bistro</td>
+              <td class="legend-emoji" id="legend-sushi">🍣</td>
+              <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
               <td><input id="sushi" type="text" name="sushi" value=""></td>
             </tr>
             <tr>
-              <td>🍱</td>
-              <td>Tokio Grill</td>
+              <td class="legend-emoji" id="legend-bento">🍱</td>
+              <td class="legend-res" id="legend-tokio">Tokio Grill</td>
               <td><input id="bento" type="text" name="bento" value=""></td>
             </tr>
             <tr>
-              <td>🇻🇳</td>
-              <td>Pho Ba Co</td>
-              <td><input id="pho" type="text" name="pho" value=""></td>
+              <td class="legend-emoji" id="legend-viet">🇻🇳</td>
+              <td class="legend-res" id="legend-pho">Pho Ba Co</td>
+              <td><input id="pho" type="text" name="viet" value=""></td>
             </tr>
             <tr>
-              <td>❤️</td>
-              <td>Ikes Love &amp; Sandwiches</td>
+              <td class="legend-emoji" id="legend-heart">❤️</td>
+              <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
               <td><input id="heart" type="text" name="heart" value=""></td>
             </tr>
             <tr>
-              <td>💊</td>
-              <td>CVS Pharmacy</td>
+              <td class="legend-emoji" id="legend-pill">💊</td>
+              <td id="legend-cvs">CVS Pharmacy</td>
               <td><input id="pill" type="text" name="pill" value=""></td>
             </tr>
           </table>
-          <div class="save">
-            Save
-          </div>
+          <input id="save" type="submit" name="save" value="Save">
         </form>
       </div>
     </div>

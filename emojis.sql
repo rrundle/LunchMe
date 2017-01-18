@@ -2,12 +2,14 @@ drop table if exists emojis;
 create table emojis (
   emoji_id serial,
   id varchar,
-  emoji varchar,
-  manifest varchar,
-  restaurant varchar,
-  res_address varchar,
-  res_city varchar,
-  res_state varchar,
-  res_zip varchar,
-  res_phone varchar
+  peps_manifest varchar,
+  panda_manifest varchar,
+  fila_manifest varchar,
+  innout_manifest varchar,
+  chipotle_manifest varchar,
+  ten_manifest varchar,
+  tokio_manifest varchar,
+  pho_manifest varchar,
+  ikes_manifest varchar,
+  cvs_manifest varchar
 );

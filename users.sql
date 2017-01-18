@@ -10,5 +10,6 @@ create table users (
   city varchar,
   state varchar(2),
   zipcode int,
-  phone varchar(11)
+  phone varchar(11),
+  twilio varchar (12)
 );

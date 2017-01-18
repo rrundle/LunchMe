@@ -41,13 +41,43 @@ function submitForm(event) {
   viewSwitch(na, generate)
   generate.textContent = 'Click to generate your number'
 
-  sendData(data)
+  var path = '/signup'
+  sendData(data, path)
     .then(result => console.log(result))
 
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
   viewSwitch(inputs, user)
 }
+
+//Saving emoji preferences
+
+function saveEmoji(event) {
+  console.log('running!')
+  event.preventDefault()
+  var formData = new FormData(event.target)
+  var id = document.getElementById('id')
+  var userId = id.getAttribute('class')
+  var emo = document.querySelector('.legend-emoji')
+  var emoji = emo.getAttribute('id')
+  var data = {
+    id: userId,
+    peps_manifest: formData.get('pizza'),
+    panda_manifest: formData.get('panda'),
+    fila_manifest: formData.get('chicken'),
+    innout_manifest: formData.get('burger'),
+    chipotle_manifest: formData.get('burrito'),
+    ten_manifest: formData.get('sushi'),
+    tokio_manifest: formData.get('bento'),
+    pho_manifest: formData.get('viet'),
+    ikes_manifest: formData.get('heart'),
+    cvs_manifest: formData.get('pill')
+  }
+  var path = '/preferences'
+  sendData(data, path)
+    .then(result => console.log(result))
+}
+
 
 //display number on screen and push to database
 function registerNumber(response) {
@@ -61,13 +91,13 @@ function registerNumber(response) {
 
 //sending and receiving signup data to database
 
-function sendData(data) {
+function sendData(data, path) {
   var options = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   }
-  var result = fetch('/signup', options)
+  var result = fetch(path, options)
     .then(res => res.json())
     .then(data => console.log(data))
   return result
@@ -106,6 +136,8 @@ function showUser(user) {
   var inputs = document.querySelector('.account')
   var customer = document.querySelector('.user')
   viewSwitch(inputs, customer)
+  var id = document.getElementById('id')
+  id.setAttribute('class', user[0].id)
   var name  = document.getElementById('name-results')
   name.textContent = user[0].name
   var address  = document.getElementById('address-results')
@@ -129,6 +161,7 @@ function noMatch() {
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
 
+//EVENT LISTENERS
 //submits form on click/enter
 
 form.addEventListener('submit', submitForm)
@@ -187,3 +220,5 @@ document.addEventListener('click', function(e) {
       .then(data => registerNumber(data))
   }
 })
+
+document.addEventListener('submit', saveEmoji)

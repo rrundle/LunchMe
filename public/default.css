@@ -235,3 +235,7 @@ input {
 #generate:hover {
   cursor: pointer;
 }
+
+.save:hover {
+  cursor: pointer;
+}
