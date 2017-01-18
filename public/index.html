@@ -97,63 +97,68 @@
         </div>
       </div>
       <div class="legend">
-        <table>
-          <tr>
-            <th scope="col">Emoji</th>
-            <th scope="col">Location</th>
-            <th scope="col">Order</th>
-          </tr>
-          <tr>
-            <td>🍕</td>
-            <td>Sgt. Pepperonis Pizza</td>
-            <td>Large cheese pizza</td>
-          </tr>
-          <tr>
-            <td>🐼</td>
-            <td>Panda Express</td>
-            <td>2 item combo, all chow mein, orange chicken, honey walnut shrimp</td>
-          </tr>
-          <tr>
-            <td>🐔</td>
-            <td>Chick-Fila-A</td>
-            <td>Spicy chicken sandwich meal, coke</td>
-          </tr>
-          <tr>
-            <td>🍔</td>
-            <td>In-N-Out</td>
-            <td>#1 plain, large coke</td>
-          </tr>
-          <tr>
-            <td>🌯</td>
-            <td>Chipotle</td>
-            <td>Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke'</td>
-          </tr>
-          <tr>
-            <td>🍣</td>
-            <td>Ten Asian Bistro</td>
-            <td>Dragon roll, shrimp tempura roll - large</td>
-          </tr>
-          <tr>
-            <td>🍱</td>
-            <td>Tokio Grill</td>
-            <td>Teriyaki chicken bento, miso soup, bottled water</td>
-          </tr>
-          <tr>
-            <td>🇻🇳</td>
-            <td>Pho Ba Co</td>
-            <td>Charbroiled beef pho, spring rolls</td>
-          </tr>
-          <tr>
-            <td>❤️</td>
-            <td>Ikes Love &amp; Sandwiches</td>
-            <td>Little mermaid on dutch crunch, no lettuce or tomatoes</td>
-          </tr>
-          <tr>
-            <td>💊</td>
-            <td>CVS Pharmacy</td>
-            <td>Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars</td>
-          </tr>
-        </table>
+        <form class="orders">
+          <table>
+            <tr>
+              <th scope="col">Emoji</th>
+              <th scope="col">Location</th>
+              <th scope="col">Order</th>
+            </tr>
+            <tr>
+              <td>🍕</td>
+              <td>Sgt. Pepperonis Pizza</td>
+              <td><input id="sgt-peps" type="text" name="order" value=""></td>
+            </tr>
+            <tr>
+              <td>🐼</td>
+              <td>Panda Express</td>
+              <td><input id="panda" type="text" name="panda" value=""></td>
+            </tr>
+            <tr>
+              <td>🐔</td>
+              <td>Chick-Fila-A</td>
+              <td><input id="chicken" type="text" name="chicken" value=""></td>
+            </tr>
+            <tr>
+              <td>🍔</td>
+              <td>In-N-Out</td>
+              <td><input id="burger" type="text" name="burger" value=""></td>
+            </tr>
+            <tr>
+              <td>🌯</td>
+              <td>Chipotle</td>
+              <td><input id="burrito" type="text" name="burrito" value=""></td>
+            </tr>
+            <tr>
+              <td>🍣</td>
+              <td>Ten Asian Bistro</td>
+              <td><input id="sushi" type="text" name="sushi" value=""></td>
+            </tr>
+            <tr>
+              <td>🍱</td>
+              <td>Tokio Grill</td>
+              <td><input id="bento" type="text" name="bento" value=""></td>
+            </tr>
+            <tr>
+              <td>🇻🇳</td>
+              <td>Pho Ba Co</td>
+              <td><input id="pho" type="text" name="pho" value=""></td>
+            </tr>
+            <tr>
+              <td>❤️</td>
+              <td>Ikes Love &amp; Sandwiches</td>
+              <td><input id="heart" type="text" name="heart" value=""></td>
+            </tr>
+            <tr>
+              <td>💊</td>
+              <td>CVS Pharmacy</td>
+              <td><input id="pill" type="text" name="pill" value=""></td>
+            </tr>
+          </table>
+          <div class="save">
+            Save
+          </div>
+        </form>
       </div>
     </div>
     <script src="main.js"></script>
