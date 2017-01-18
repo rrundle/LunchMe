@@ -118,6 +118,8 @@ function showUser(user) {
   account.textContent = ''
   var success = document.getElementById('success')
   success.textContent = 'Welcome back! Happy lunching.'
+  var twilio = document.getElementById('phone-text')
+  twilio.textContent = user[0].twilio
 }
 
 function noMatch() {
