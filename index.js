@@ -162,10 +162,24 @@ app.post('/signup', function(req, res) {
     zipcode: req.body.zip,
     phone: req.body.phone,
     email: req.body.email,
+    twilio: req.body.twilio
   })
   query
   .then((users) => res.json(users))
   .catch((error) => console.log('Sorry, could not insert that user', error))
+})
+
+//send twilio number to database
+app.post('/twilio', function(req, res) {
+  console.log(req.body.name)
+  var query = knex('users').insert({
+    twilio: req.body.twilio
+  })
+    .where('name', req.body.name)
+  query
+    .then((users) => res.json(users))
+    .then((table) => console.log(table))
+    .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
 })
 
 //get data from user db to send to public folder

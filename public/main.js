@@ -35,27 +35,49 @@ function submitForm(event) {
   phone.textContent = formData.get('phone')
   var email  = document.getElementById('email-results')
   email.textContent = formData.get('email')
+
+  var na = document.getElementById('phone-text')
+  var generate = document.getElementById('generate')
+  viewSwitch(na, generate)
+  generate.textContent = 'Click to generate your number'
+
+  sendData(data)
+    .then(result => console.log(result))
+
   var result = fetch('/number')
   result
     .then(res => res.json())
-    .then(data => console.log(data))
-  sendData(data)
-  .then(result => console.log(result))
+    .then(data => registerNumber(data))
+    .then(number => console.log(number))
+
+  var inputs = document.querySelector('.account')
+  var user = document.querySelector('.user')
+  viewSwitch(inputs, user)
 }
 
 //sending and receiving signup data to database
 
 function sendData(data) {
-  var inputs = document.querySelector('.account')
-  var user = document.querySelector('.user')
   var options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   }
   var result = fetch('/signup', options)
     .then(res => res.json())
-    .then(viewSwitch(inputs, user))
+    .then(data => console.log(data))
+  return result
+}
+
+function sendNumber(data) {
+  var options = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }
+  var result = fetch('/twilio', options)
+    .then(res => res.json())
+    .then(data => console.log(data))
   return result
 }
 
@@ -90,6 +112,17 @@ function noMatch() {
   var email = document.getElementById('email-button')
   email.appendChild(error)
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
+}
+
+//display number on screen and push to database
+function registerNumber(response) {
+  var name  = document.getElementById('name')
+  console.log(name.value)
+  var data = {
+    name: name.value,
+    twilio: response,
+  }
+  sendNumber(data)
 }
 
 //submits form on click/enter
@@ -141,3 +174,5 @@ document.addEventListener('click', function(e) {
     submit.textContent = 'Submit'
   }
 })
+
+document.addEventListener
