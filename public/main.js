@@ -58,8 +58,6 @@ function saveEmoji(event) {
   var formData = new FormData(event.target)
   var id = document.getElementById('id')
   var userId = id.getAttribute('class')
-  var emo = document.querySelector('.legend-emoji')
-  var emoji = emo.getAttribute('id')
   var data = {
     id: userId,
     peps_manifest: formData.get('pizza'),

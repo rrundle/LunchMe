@@ -1,3 +1,4 @@
+//GLOBAL VARIABLES
 var express = require('express')
 var app = express()
 
@@ -26,10 +27,11 @@ var knex = connex({
 
 var PORT = 2999
 
+//Supported restaurants
 var orders = [
   {
     emoticon: emoji.get('pizza'),
-    order: 'Large cheese pizza',
+    tableName: 'peps_manifest',
     pickupName: 'Sgt. Pepperonis Pizza',
     order_address: '2300 SE Bristol St #F',
     order_city: 'Newport Beach',
@@ -39,7 +41,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('panda_face'),
-    order: '2 item combo, all chow mein, orange chicken, honey walnut shrimp',
+    tableName: 'panda_manifest',
     pickupName: 'Panda Express',
     order_address: '13266 Jamboree Rd',
     order_city: 'Irvine',
@@ -49,7 +51,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('chicken'),
-    order: 'Spicy chicken sandwich meal, coke',
+    tableName: 'fila_manifest',
     pickupName: 'Chick-Fil-A',
     order_address: '4127 Campus Dr',
     order_city: 'Irvine',
@@ -59,7 +61,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('hamburger'),
-    order: '#1 plain, large coke',
+    tableName: 'innout_manifest',
     pickupName: 'In-N-Out',
     order_address: '4115 Campus Dr',
     order_city: 'Irvine',
@@ -69,7 +71,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('burrito'),
-    order: 'Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke',
+    tableName: 'chipotle_manifest',
     pickupName: 'Chipotle',
     order_address: '4225 Campus Dr Suite A 116',
     order_city: 'Irvine',
@@ -79,7 +81,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('sushi'),
-    order: 'Dragon roll, shrimp tempura roll - large',
+    tableName: 'ten_manifest',
     pickupName: 'Ten Asian Bistro',
     order_address: '4647 MacArthur Blvd',
     order_city: 'Newport Beach',
@@ -89,7 +91,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('bento'),
-    order: 'Teriyaki chicken bento, miso soup, bottled water',
+    tableName: 'tokio_manifest',
     pickupName: 'Tokio Grill',
     order_address: '17915 MacArthur Blvd',
     order_city: 'Irvine',
@@ -99,7 +101,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('flag-vn'),
-    order: 'Charbroiled beef pho, spring rolls',
+    tableName: 'pho_manifest',
     pickupName: 'Pho Ba Co',
     order_address: '4250 Barranca Pkwy Suite K',
     order_city: 'Irvine',
@@ -109,7 +111,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('hearts'),
-    order: 'Little mermaid on dutch crunch, no lettuce or tomatoes',
+    tableName: 'ikes_manifest',
     pickupName: 'Ikes Love & Sandwiches',
     order_address: '4221 MacArthur Blvd',
     order_city: 'Newport Beach',
@@ -119,7 +121,7 @@ var orders = [
   },
   {
     emoticon: emoji.get('pill'),
-    order: 'Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars',
+    tableName: 'cvs_manifest',
     pickupName: 'CVS Pharmacy',
     order_address: '2521 Eastbluff Dr',
     order_city: 'Newport Beach',
@@ -129,6 +131,7 @@ var orders = [
   }
 ]
 
+//FUNCTIONS
 function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number) {
   return {
     manifest: manifest,
@@ -147,41 +150,58 @@ function cantProcess(response, twilio) {
   response.end(twilio.toString())
 }
 
-function setOrder(array, obj, res) {
-  console.log(obj)
+function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio response*/) {
+  console.log(obj.Body)
   var textString = obj.Body
   var space = ' '
   var arrayOfText = textString.split(space)
   var matches = []
+  console.log(arrayOfText[1])
   for (var i = 0; i < orders.length; i++) {
+    console.log(orders[i].emoticon)
     if (orders[i].emoticon === arrayOfText[1]) {
 
       matches.push(orders[i])
-      var manifest = orders[i].order
       var pickup_name = orders[i].pickupName
       var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
       var pickup_phone_number = orders[i].pickupPhone
 
+      //var manifest = orders[i].order
       var dropoff_name = array[0].name
       var dropoff_address = array[0].address + ', ' + array[0].city + ', ' + array[0].state + ', ' + array[0].zipcode
+      console.log(dropoff_address)
       var dropoff_phone_number = array[0].phone
 
-      var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
-      postmates.new(delivery, function(err, confirm) {
-        var twiml = new twilio.TwimlResponse()
-        twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
-        res.writeHead(200, {'Content-Type': 'text/xml'})
-        res.end(twiml.toString())
-      })
-    }
-    if (matches.length === 0) {
-      var twiml = new twilio.TwimlResponse()
-      cantProcess(res, twiml)
-      return
-    }
-  }
-  }
+      var item = array[0]
+      console.log(array[0])
+      var match = orders[i].tableName
+      console.log(match)
+        for (var property in item) {
+          if (match === property) {
+            console.log(array[0][property])
+            var manifest = array[0][property]
 
+          var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
+          postmates.new(delivery, function(err, confirm) {
+            console.log(confirm.body)
+            var twiml = new twilio.TwimlResponse()
+            twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
+            res.writeHead(200, {'Content-Type': 'text/xml'})
+            res.end(twiml.toString())
+          })
+      }
+    }
+    }
+
+  }
+  if (matches.length === 0) {
+    var twiml = new twilio.TwimlResponse()
+    cantProcess(res, twiml)
+    return
+  }
+}
+
+//ROUTES AND MIDDLEWARE
 app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
@@ -205,9 +225,11 @@ app.post('/signup', function(req, res) {
 
 app.post('/preferences', function(req, res) {
   console.log(req.body)
-  var query = knex('emojis')
-    .insert({
-      id: req.body.id,
+  var query = knex('users')
+    .where({
+      id: req.body.id
+    })
+    .update({
       peps_manifest: req.body.peps_manifest,
       panda_manifest: req.body.panda_manifest,
       fila_manifest: req.body.fila_manifest,
@@ -262,6 +284,7 @@ app.get('/login', function (req, res) {
 
 //check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
+  console.log(req.body)
   var query = knex
     .where({
       'twilio': req.body.To
@@ -269,37 +292,8 @@ app.post('/sms', function(req, res) {
     .select()
     .from('users')
   query
-    .then(result => console.log(result))
     .then(data => setOrder(data, req.body, res))
     .catch(err => console.log(err))
-/*
-  var textString = req.body.Body
-  var space = ' '
-  var arrayOfText = textString.split(space)
-  var matches = []
-  for (var i = 0; i < orders.length; i++) {
-    if (orders[i].emoticon === arrayOfText[1]) {
-      //matches.push(orders[i])
-      //var manifest = orders[i].order
-      //var pickup_name = orders[i].pickupName
-      //var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
-      //var pickup_phone_number = orders[i].pickupPhone
-
-      var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number)
-      postmates.new(delivery, function(err, confirm) {
-        var twiml = new twilio.TwimlResponse()
-        twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
-        res.writeHead(200, {'Content-Type': 'text/xml'})
-        res.end(twiml.toString())
-      })
-    }
-  }
-  if (matches.length === 0) {
-    var twiml = new twilio.TwimlResponse()
-    cantProcess(res, twiml)
-    return
-  }
-  */
 })
 
 //webhook for order updates from Postmates
@@ -323,11 +317,11 @@ app.get('/number', function(req, res) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
 
-    //client.incomingPhoneNumbers.create({
-    //  phoneNumber: number.phone_number
-  //  }, function(err, purchasedNumber) {
-    //  console.log(purchasedNumber.sid)
-  //  })
+    client.incomingPhoneNumbers.create({
+      phoneNumber: number.phone_number
+    }, function(err, purchasedNumber) {
+      console.log(purchasedNumber.sid)
+    })
   })
 })
 

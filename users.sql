@@ -11,5 +11,15 @@ create table users (
   state varchar(2),
   zipcode int,
   phone varchar(11),
-  twilio varchar (12)
+  twilio varchar (12),
+  peps_manifest varchar,
+  panda_manifest varchar,
+  fila_manifest varchar,
+  innout_manifest varchar,
+  chipotle_manifest varchar,
+  ten_manifest varchar,
+  tokio_manifest varchar,
+  pho_manifest varchar,
+  ikes_manifest varchar,
+  cvs_manifest varchar
 );
