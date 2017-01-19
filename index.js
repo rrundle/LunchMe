@@ -170,8 +170,6 @@ app.post('/signup', function(req, res) {
 
 //send twilio number to database
 app.post('/twilio', function(req, res) {
-  console.log(req.body.twilio)
-  console.log(req.body.name)
   var query = knex('users')
     .where({
       name: req.body.name
