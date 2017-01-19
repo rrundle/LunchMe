@@ -176,10 +176,10 @@ function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio resp
       console.log(array[0])
       var match = orders[i].tableName
       console.log(match)
-        for (var property in item) {
-          if (match === property) {
-            console.log(array[0][property])
-            var manifest = array[0][property]
+      for (var property in item) {
+        if (match === property) {
+          console.log(array[0][property])
+          var manifest = array[0][property]
 
           var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
           postmates.new(delivery, function(err, confirm) {
@@ -189,8 +189,8 @@ function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio resp
             res.writeHead(200, {'Content-Type': 'text/xml'})
             res.end(twiml.toString())
           })
+        }
       }
-    }
     }
 
   }
@@ -299,8 +299,9 @@ app.post('/sms', function(req, res) {
 //webhook for order updates from Postmates
 
 app.post('/postmates', function(req, res) {
+  console.log('+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''))
   client.messages.create({
-      to: '+16268402294',
+      to: '+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''),
       from: '+16266583335',
       body: 'Status of order #' + req.body.data.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
   }, function(err, message) {
@@ -317,13 +318,26 @@ app.get('/number', function(req, res) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
 
-    client.incomingPhoneNumbers.create({
-      phoneNumber: number.phone_number
-    }, function(err, purchasedNumber) {
-      console.log(purchasedNumber.sid)
-    })
+    //client.incomingPhoneNumbers.create({
+      //phoneNumber: number.phone_number
+    //}, function(err, purchasedNumber) {
+      //console.log(purchasedNumber.sid)
+    //})
   })
 })
+
+/*
+//getting id of user from submitted form
+app.get('/id', function(req, res) {
+  var query = knex('users')
+    .select('id')
+    .max('id')
+    .returning('id')
+  query
+    .then(result => res.json(result))
+    .then(data => console.log(data))
+})
+*/
 
 //listener for server
 app.listen(PORT, function() {

@@ -50,10 +50,17 @@ function submitForm(event) {
   viewSwitch(inputs, user)
 }
 
+/*
+function getId(data) {
+  var formData = new FormData(event.target)
+  var idValue = formData.get('email')
+  var id = document.getElementById('email-results')
+}
+*/
+
 //Saving emoji preferences
 
 function saveEmoji(event) {
-  console.log('running!')
   event.preventDefault()
   var formData = new FormData(event.target)
   var id = document.getElementById('id')
@@ -74,6 +81,14 @@ function saveEmoji(event) {
   var path = '/preferences'
   sendData(data, path)
     .then(result => console.log(result))
+
+/*
+  var inputs = document.getElementsByTagName('input')
+  for (var i = 0; i < inputs; i++) {
+    console.log(inputs[i])
+    inputs[i].setAttribute('disabled', 'disabled')
+  }
+*/
 }
 
 
@@ -212,10 +227,19 @@ document.addEventListener('click', function(e) {
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('generate') !== -1) {
+
+    //get twilio number
     var result = fetch('/number')
     result
       .then(res => res.json())
       .then(data => registerNumber(data))
+/*
+    //get id of recently submitted user
+    var id = fetch('./id')
+    id
+      .then(res => res.json())
+      .then(data => console.log(data))
+*/
   }
 })
 
