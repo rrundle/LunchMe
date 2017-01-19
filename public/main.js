@@ -1,17 +1,9 @@
-//Create login box above twilio number that has existing box
-//for input that is creatd on click and fades in with animation
-//login button should be removed (fade out) when submit button is clicked
-//If login enter button is clicked, form is removed and user data is displayed
-
-//view switching
 var form = document.querySelector('.account')
 
 function viewSwitch(hide, view) {
   hide.style.visibility = 'hidden'
   view.style.visibility = 'visible'
 }
-
-//creating object from signup form, setting contents page on viewSwitch
 
 function submitForm(event) {
   event.preventDefault()
@@ -75,7 +67,6 @@ function submitForm(event) {
   viewSwitch(inputs, user)
 }
 
-//display number on screen and push to database
 function registerNumber(response) {
   var name  = document.getElementById('name-results')
   var data = {
@@ -84,8 +75,6 @@ function registerNumber(response) {
   }
   sendNumber(data)
 }
-
-//sending and receiving signup data to database
 
 function sendData(data) {
   var options = {
@@ -120,7 +109,6 @@ function sendNumber(data) {
   return result
 }
 
-//checking email against return array for existing user
 function emailMatches(array) {
   var input = document.getElementById('email-input')
   return array.filter(function(person) {
@@ -178,11 +166,7 @@ function noMatch() {
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
 
-//submits form on click/enter
-
 form.addEventListener('submit', submitForm)
-
-//checks email in database on click
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('email-button') !== -1) {
@@ -201,8 +185,6 @@ document.addEventListener('click', function(e) {
       .catch((error) => console.log(error))
   }
 })
-
-//login box appears when login is clicked
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('login-button') !== -1) {
