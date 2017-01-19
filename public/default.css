@@ -145,6 +145,7 @@ input {
   stroke-dashoffset: -474;
   stroke-width: 8px;
   stroke: #094aa8;
+  visibility: hidden;
 }
 
 .text {
@@ -169,12 +170,9 @@ input {
   }
 }
 
-#phone-number:hover .shape {
+#phone-text:hover {
   -webkit-animation: 0.5s draw linear forwards;
   animation: 0.5s draw linear forwards;
-}
-
-#phone-text:hover {
   cursor: text;
 }
 
@@ -227,4 +225,13 @@ input {
 
 #email-input {
   width: 300px;
+}
+
+#generate {
+  width: 200px;
+  height: 50px;
+}
+
+#generate:hover {
+  cursor: pointer;
 }

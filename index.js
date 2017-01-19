@@ -152,7 +152,6 @@ app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
 
-//send form data to database and send back success
 app.post('/signup', function(req, res) {
   var query = knex('users').insert({
     name: req.body.name,
@@ -168,21 +167,33 @@ app.post('/signup', function(req, res) {
   .catch((error) => console.log('Sorry, could not insert that user', error))
 })
 
-//get data from user db to send to public folder
+app.post('/twilio', function(req, res) {
+  var query = knex('users')
+    .where({
+      name: req.body.name
+    })
+    .update({
+      twilio: req.body.twilio
+    })
+    .returning('twilio')
+  query
+    .then((number) => res.json(number))
+    .then((twil) => console.log(twil))
+    .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
+})
+
 app.get('/user', function(req, res) {
   var query = knex.select().from('users')
   query
     .then((users) => res.json(users))
 })
 
-//send login email input to db and check for matches
 app.get('/login', function (req, res) {
   var query = knex.select().from('users')
   query
     .then((emails) => {res.json(emails)})
 })
 
-//check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
   var textString = req.body.Body
   var space = ' '
@@ -211,7 +222,6 @@ app.post('/sms', function(req, res) {
   }
 })
 
-//webhook for order updates from Postmates
 app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+16268402294',
@@ -223,7 +233,21 @@ app.post('/postmates', function(req, res) {
   res.sendStatus(200)
 })
 
-//listener for server
+app.get('/number', function(req, res) {
+  client.availablePhoneNumbers('US').local.list({
+    areaCode: '626'
+  }, function(err, data) {
+    var number = data.availablePhoneNumbers[0]
+    res.json(number.phone_number)
+
+    client.incomingPhoneNumbers.create({
+      phoneNumber: number.phone_number
+    }, function(err, purchasedNumber) {
+      console.log(purchasedNumber.sid)
+    })
+  })
+})
+
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
 })
