@@ -206,8 +206,8 @@ app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
 
-//send form data to database and send back success
 app.post('/signup', function(req, res) {
+  console.log('running!')
   var query = knex('users')
     .insert({
       name: req.body.name,
@@ -218,8 +218,9 @@ app.post('/signup', function(req, res) {
       phone: req.body.phone,
       email: req.body.email,
     })
+    .returning('id')
   query
-    .then((users) => res.json(users))
+    .then(id => res.json(id))
     .catch((error) => console.log('Sorry, could not insert that user', error))
 })
 
@@ -246,10 +247,7 @@ app.post('/preferences', function(req, res) {
     .catch(error => console.log(error))
 })
 
-//send twilio number to database
 app.post('/twilio', function(req, res) {
-  console.log(req.body.twilio)
-  console.log(req.body.name)
   var query = knex('users')
     .where({
       name: req.body.name
@@ -264,7 +262,6 @@ app.post('/twilio', function(req, res) {
     .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
 })
 
-//get data from user db to send to public folder
 app.get('/user', function(req, res) {
   var query = knex
     .select()
@@ -273,7 +270,6 @@ app.get('/user', function(req, res) {
     .then((users) => res.json(users))
 })
 
-//send login email input to db and check for matches
 app.get('/login', function (req, res) {
   var query = knex
     .select()
@@ -282,7 +278,6 @@ app.get('/login', function (req, res) {
     .then((emails) => {res.json(emails)})
 })
 
-//check incoming sms body, if matches to order Array send order
 app.post('/sms', function(req, res) {
   console.log(req.body)
   var query = knex
@@ -296,8 +291,6 @@ app.post('/sms', function(req, res) {
     .catch(err => console.log(err))
 })
 
-//webhook for order updates from Postmates
-
 app.post('/postmates', function(req, res) {
   console.log('+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''))
   client.messages.create({
@@ -310,7 +303,6 @@ app.post('/postmates', function(req, res) {
   res.sendStatus(200)
 })
 
-//requesting new number for new user
 app.get('/number', function(req, res) {
   client.availablePhoneNumbers('US').local.list({
     areaCode: '626'
@@ -339,7 +331,6 @@ app.get('/id', function(req, res) {
 })
 */
 
-//listener for server
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
 })

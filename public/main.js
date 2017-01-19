@@ -1,19 +1,13 @@
-//Create login box above twilio number that has existing box
-//for input that is creatd on click and fades in with animation
-//login button should be removed (fade out) when submit button is clicked
-//If login enter button is clicked, form is removed and user data is displayed
-
-//view switching
 var form = document.querySelector('.account')
+var legend = document.querySelector('.orders')
 
 function viewSwitch(hide, view) {
   hide.style.visibility = 'hidden'
   view.style.visibility = 'visible'
 }
 
-//creating object from signup form, setting contents page on viewSwitch
-
 function submitForm(event) {
+
   event.preventDefault()
   var formData = new FormData(event.target)
   var data = {
@@ -25,16 +19,50 @@ function submitForm(event) {
     phone: formData.get('phone'),
     email: formData.get('email')
   }
-  var name  = document.getElementById('name-results')
+
+  var accountInfo = document.getElementById('account-info')
+
+  var customer = document.createElement('div')
+  customer.setAttribute('class', 'user')
+
+  var success = document.createElement('div')
+  success.textContent = 'Success! You are now ready to start using LunchMe! See below for how to place an order.'
+  success.setAttribute('id', 'success')
+  customer.appendChild(success)
+
+  var id = document.createElement('div')
+  id.setAttribute('id', 'id')
+  customer.appendChild(id)
+
+  var name  = document.createElement('div')
   name.textContent = formData.get('name')
-  var address  = document.getElementById('address-results')
+  name.setAttribute('id', 'name-results')
+  customer.appendChild(name)
+
+  var address  = document.createElement('div')
   address.textContent = formData.get('address')
-  var city  = document.getElementById('city-results')
-  city.textContent = formData.get('city') + ', ' + formData.get('state') + ', ' + formData.get('zip')
-  var phone  = document.getElementById('phone-results')
+  address.setAttribute('id', 'address-results')
+  customer.appendChild(address)
+
+  var city  = document.createElement('div')
+  city.textContent =  formData.get('city') + ', ' + formData.get('state') + ', ' + formData.get('zip')
+  city.setAttribute('id', 'city-results')
+  customer.appendChild(city)
+
+  var phone  = document.createElement('div')
   phone.textContent = formData.get('phone')
-  var email  = document.getElementById('email-results')
+  phone.setAttribute('id', 'phone-results')
+  customer.appendChild(phone)
+
+  var email = document.createElement('div')
   email.textContent = formData.get('email')
+  email.setAttribute('id', 'email-results')
+  customer.appendChild(email)
+
+  var account = document.getElementById('account-title')
+  account.textContent = ''
+
+  accountInfo.appendChild(customer)
 
   var na = document.getElementById('phone-text')
   var generate = document.getElementById('generate')
@@ -58,7 +86,10 @@ function getId(data) {
 }
 */
 
-//Saving emoji preferences
+function notify(elementOne, elementTwo) {
+  elementTwo.appendChild(elementOne)
+
+}
 
 function saveEmoji(event) {
   event.preventDefault()
@@ -82,17 +113,13 @@ function saveEmoji(event) {
   sendData(data, path)
     .then(result => console.log(result))
 
-/*
-  var inputs = document.getElementsByTagName('input')
-  for (var i = 0; i < inputs; i++) {
-    console.log(inputs[i])
-    inputs[i].setAttribute('disabled', 'disabled')
-  }
-*/
+  var update = document.createElement('span')
+  update.setAttribute('id', 'update')
+  update.textContent = "Preferences saved!"
+  var save = document.getElementById('save')
+  notify(update, save)
 }
 
-
-//display number on screen and push to database
 function registerNumber(response) {
   var name  = document.getElementById('name-results')
   var data = {
@@ -102,8 +129,6 @@ function registerNumber(response) {
   sendNumber(data)
 }
 
-//sending and receiving signup data to database
-
 function sendData(data, path) {
   var options = {
     method: 'POST',
@@ -112,8 +137,13 @@ function sendData(data, path) {
   }
   var result = fetch(path, options)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => addId(data))
   return result
+}
+
+function addId(id) {
+  var idBadge = document.getElementById('id')
+  idBadge.setAttribute('class', id)
 }
 
 function displayTwilio(number) {
@@ -137,7 +167,6 @@ function sendNumber(data) {
   return result
 }
 
-//checking email against return array for existing user
 function emailMatches(array) {
   var input = document.getElementById('email-input')
   return array.filter(function(person) {
@@ -146,25 +175,82 @@ function emailMatches(array) {
 }
 
 function showUser(user) {
-  var inputs = document.querySelector('.account')
-  var customer = document.querySelector('.user')
-  viewSwitch(inputs, customer)
-  var id = document.getElementById('id')
+
+  var accountInfo = document.getElementById('account-info')
+
+  var customer = document.createElement('div')
+  customer.setAttribute('class', 'user')
+
+  var id = document.createElement('div')
+  id.setAttribute('id', 'id')
   id.setAttribute('class', user[0].id)
-  var name  = document.getElementById('name-results')
+  customer.appendChild(id)
+
+  var success = document.createElement('div')
+  success.textContent = 'Welcome back! Happy lunching!'
+  success.setAttribute('id', 'success')
+  customer.appendChild(success)
+
+  var name  = document.createElement('div')
   name.textContent = user[0].name
-  var address  = document.getElementById('address-results')
+  name.setAttribute('id', 'name-results')
+  customer.appendChild(name)
+
+  var address  = document.createElement('div')
   address.textContent = user[0].address
-  var city  = document.getElementById('city-results')
+  address.setAttribute('id', 'address-results')
+  customer.appendChild(address)
+
+  var city  = document.createElement('div')
   city.textContent =  user[0].city + ', ' + user[0].state + ', ' + user[0].zip
-  var phone  = document.getElementById('phone-results')
+  city.setAttribute('id', 'city-results')
+  customer.appendChild(city)
+
+  var phone  = document.createElement('div')
   phone.textContent = user[0].phone
+  phone.setAttribute('id', 'phone-results')
+  customer.appendChild(phone)
+
   var account = document.getElementById('account-title')
   account.textContent = ''
-  var success = document.getElementById('success')
-  success.textContent = 'Welcome back! Happy lunching.'
+
+  accountInfo.appendChild(customer)
+
   var twilio = document.getElementById('phone-text')
   twilio.textContent = user[0].twilio
+
+  var peps = document.getElementById('sgt-peps')
+  peps.setAttribute('value', user[0].peps_manifest)
+
+  var panda = document.getElementById('panda')
+  panda.setAttribute('value', user[0].panda_manifest)
+
+  var chicken = document.getElementById('chicken')
+  chicken.setAttribute('value', user[0].fila_manifest)
+
+  var burger = document.getElementById('burger')
+  burger.setAttribute('value', user[0].innout_manifest)
+
+  var burrito = document.getElementById('burrito')
+  burrito.setAttribute('value', user[0].chipotle_manifest)
+
+  var sushi = document.getElementById('sushi')
+  sushi.setAttribute('value', user[0].ten_manifest)
+
+  var bento = document.getElementById('bento')
+  bento.setAttribute('value', user[0].tokio_manifest)
+
+  var pho = document.getElementById('pho')
+  pho.setAttribute('value', user[0].pho_manifest)
+
+  var heart = document.getElementById('heart')
+  heart.setAttribute('value', user[0].ikes_manifest)
+
+  var pill = document.getElementById('pill')
+  pill.setAttribute('value', user[0].cvs_manifest)
+
+  var inputs = document.querySelector('.account')
+  viewSwitch(inputs, customer)
 }
 
 function noMatch() {
@@ -174,12 +260,7 @@ function noMatch() {
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
 
-//EVENT LISTENERS
-//submits form on click/enter
-
 form.addEventListener('submit', submitForm)
-
-//checks email in database on click
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('email-button') !== -1) {
@@ -198,8 +279,6 @@ document.addEventListener('click', function(e) {
       .catch((error) => console.log(error))
   }
 })
-
-//login box appears when login is clicked
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('login-button') !== -1) {
@@ -227,8 +306,6 @@ document.addEventListener('click', function(e) {
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('generate') !== -1) {
-
-    //get twilio number
     var result = fetch('/number')
     result
       .then(res => res.json())
@@ -243,4 +320,4 @@ document.addEventListener('click', function(e) {
   }
 })
 
-document.addEventListener('submit', saveEmoji)
+legend.addEventListener('submit', saveEmoji)
