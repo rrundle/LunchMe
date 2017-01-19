@@ -78,14 +78,6 @@ function submitForm(event) {
   viewSwitch(inputs, user)
 }
 
-/*
-function getId(data) {
-  var formData = new FormData(event.target)
-  var idValue = formData.get('email')
-  var id = document.getElementById('email-results')
-}
-*/
-
 function notify(elementOne, elementTwo) {
   elementTwo.appendChild(elementOne)
 
@@ -310,13 +302,6 @@ document.addEventListener('click', function(e) {
     result
       .then(res => res.json())
       .then(data => registerNumber(data))
-/*
-    //get id of recently submitted user
-    var id = fetch('./id')
-    id
-      .then(res => res.json())
-      .then(data => console.log(data))
-*/
   }
 })
 

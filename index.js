@@ -151,14 +151,11 @@ function cantProcess(response, twilio) {
 }
 
 function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio response*/) {
-  console.log(obj.Body)
   var textString = obj.Body
   var space = ' '
   var arrayOfText = textString.split(space)
   var matches = []
-  console.log(arrayOfText[1])
   for (var i = 0; i < orders.length; i++) {
-    console.log(orders[i].emoticon)
     if (orders[i].emoticon === arrayOfText[1]) {
 
       matches.push(orders[i])
@@ -169,21 +166,16 @@ function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio resp
       //var manifest = orders[i].order
       var dropoff_name = array[0].name
       var dropoff_address = array[0].address + ', ' + array[0].city + ', ' + array[0].state + ', ' + array[0].zipcode
-      console.log(dropoff_address)
       var dropoff_phone_number = array[0].phone
 
       var item = array[0]
-      console.log(array[0])
       var match = orders[i].tableName
-      console.log(match)
       for (var property in item) {
         if (match === property) {
-          console.log(array[0][property])
           var manifest = array[0][property]
 
           var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
           postmates.new(delivery, function(err, confirm) {
-            console.log(confirm.body)
             var twiml = new twilio.TwimlResponse()
             twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
             res.writeHead(200, {'Content-Type': 'text/xml'})
@@ -207,7 +199,6 @@ app.use(jsonParser)
 app.use(express.static('public'))
 
 app.post('/signup', function(req, res) {
-  console.log('running!')
   var query = knex('users')
     .insert({
       name: req.body.name,
@@ -221,11 +212,10 @@ app.post('/signup', function(req, res) {
     .returning('id')
   query
     .then(id => res.json(id))
-    .catch((error) => console.log('Sorry, could not insert that user', error))
+    .catch((error) => res.send('Sorry, could not insert that user', error))
 })
 
 app.post('/preferences', function(req, res) {
-  console.log(req.body)
   var query = knex('users')
     .where({
       id: req.body.id
@@ -244,7 +234,7 @@ app.post('/preferences', function(req, res) {
     })
   query
     .then(emoji => res.json(emoji))
-    .catch(error => console.log(error))
+    .catch(error => res.send('Sorry could not update your preferences', error))
 })
 
 app.post('/twilio', function(req, res) {
@@ -258,8 +248,7 @@ app.post('/twilio', function(req, res) {
     .returning('twilio')
   query
     .then((number) => res.json(number))
-    .then((twil) => console.log(twil))
-    .catch((error) => console.log('Sorry, we couldn\'t get a phone number for you', error))
+    .catch((error) => res.send('Sorry, we couldn\'t get a phone number for you', error))
 })
 
 app.get('/user', function(req, res) {
@@ -279,7 +268,6 @@ app.get('/login', function (req, res) {
 })
 
 app.post('/sms', function(req, res) {
-  console.log(req.body)
   var query = knex
     .where({
       'twilio': req.body.To
@@ -288,11 +276,10 @@ app.post('/sms', function(req, res) {
     .from('users')
   query
     .then(data => setOrder(data, req.body, res))
-    .catch(err => console.log(err))
+    .catch(err => res.send(err))
 })
 
 app.post('/postmates', function(req, res) {
-  console.log('+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''))
   client.messages.create({
       to: '+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''),
       from: '+16266583335',
@@ -310,26 +297,13 @@ app.get('/number', function(req, res) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
 
-    //client.incomingPhoneNumbers.create({
-      //phoneNumber: number.phone_number
-    //}, function(err, purchasedNumber) {
-      //console.log(purchasedNumber.sid)
-    //})
+    client.incomingPhoneNumbers.create({
+      phoneNumber: number.phone_number
+    }, function(err, purchasedNumber) {
+      console.log(purchasedNumber.sid)
+    })
   })
 })
-
-/*
-//getting id of user from submitted form
-app.get('/id', function(req, res) {
-  var query = knex('users')
-    .select('id')
-    .max('id')
-    .returning('id')
-  query
-    .then(result => res.json(result))
-    .then(data => console.log(data))
-})
-*/
 
 app.listen(PORT, function() {
   console.log(`Express server listening on port ${PORT}`)
