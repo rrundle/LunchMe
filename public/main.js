@@ -25,6 +25,48 @@ function submitForm(event) {
     phone: formData.get('phone'),
     email: formData.get('email')
   }
+
+  var accountInfo = document.getElementById('account-info')
+
+  var customer = document.createElement('div')
+  customer.setAttribute('class', 'user')
+
+  var success = document.createElement('div')
+  success.textContent = 'Success! You are now ready to start using LunchMe! See below for how to place an order.'
+  success.setAttribute('id', 'success')
+  customer.appendChild(success)
+
+  var name  = document.createElement('div')
+  name.textContent = formData.get('name')
+  name.setAttribute('id', 'name-results')
+  customer.appendChild(name)
+
+  var address  = document.createElement('div')
+  address.textContent = formData.get('address')
+  address.setAttribute('id', 'address-results')
+  customer.appendChild(address)
+
+  var city  = document.createElement('div')
+  city.textContent =  formData.get('city') + ', ' + formData.get('state') + ', ' + formData.get('zip')
+  city.setAttribute('id', 'city-results')
+  customer.appendChild(city)
+
+  var phone  = document.createElement('div')
+  phone.textContent = formData.get('phone')
+  phone.setAttribute('id', 'phone-results')
+  customer.appendChild(phone)
+
+  var email = document.createElement('div')
+  email.textContent = formData.get('email')
+  email.setAttribute('id', 'email-results')
+  customer.appendChild(email)
+
+  var account = document.getElementById('account-title')
+  account.textContent = ''
+
+  accountInfo.appendChild(customer)
+
+  /*
   var name  = document.getElementById('name-results')
   name.textContent = formData.get('name')
   var address  = document.getElementById('address-results')
@@ -35,6 +77,7 @@ function submitForm(event) {
   phone.textContent = formData.get('phone')
   var email  = document.getElementById('email-results')
   email.textContent = formData.get('email')
+  */
   sendData(data)
   .then(result => console.log(result))
 }
@@ -46,7 +89,7 @@ function sendData(data) {
   var user = document.querySelector('.user')
   var options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   }
   var result = fetch('/signup', options)
@@ -64,21 +107,43 @@ function emailMatches(array) {
 }
 
 function showUser(user) {
-  var inputs = document.querySelector('.account')
-  var customer = document.querySelector('.user')
-  viewSwitch(inputs, customer)
-  var name  = document.getElementById('name-results')
+  var accountInfo = document.getElementById('account-info')
+
+  var customer = document.createElement('div')
+  customer.setAttribute('class', 'user')
+
+  var success = document.createElement('div')
+  success.textContent = 'Welcome back! Happy lunching!'
+  success.setAttribute('id', 'success')
+  customer.appendChild(success)
+
+  var name  = document.createElement('div')
   name.textContent = user[0].name
-  var address  = document.getElementById('address-results')
+  name.setAttribute('id', 'name-results')
+  customer.appendChild(name)
+
+  var address  = document.createElement('div')
   address.textContent = user[0].address
-  var city  = document.getElementById('city-results')
+  address.setAttribute('id', 'address-results')
+  customer.appendChild(address)
+
+  var city  = document.createElement('div')
   city.textContent =  user[0].city + ', ' + user[0].state + ', ' + user[0].zip
-  var phone  = document.getElementById('phone-results')
+  city.setAttribute('id', 'city-results')
+  customer.appendChild(city)
+
+  var phone  = document.createElement('div')
   phone.textContent = user[0].phone
+  phone.setAttribute('id', 'phone-results')
+  customer.appendChild(phone)
+
   var account = document.getElementById('account-title')
   account.textContent = ''
-  var success = document.getElementById('success')
-  success.textContent = 'Welcome back! Happy lunching.'
+
+  accountInfo.appendChild(customer)
+
+  var inputs = document.querySelector('.account')
+  viewSwitch(inputs, customer)
 }
 
 function noMatch() {
