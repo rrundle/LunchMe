@@ -37,6 +37,7 @@ function submitForm(event) {
   customer.appendChild(success)
 
   var name  = document.createElement('div')
+
   name.textContent = formData.get('name')
   name.setAttribute('id', 'name-results')
   customer.appendChild(name)
@@ -65,11 +66,6 @@ function submitForm(event) {
   account.textContent = ''
 
   accountInfo.appendChild(customer)
-
-  var na = document.getElementById('phone-text')
-  var generate = document.getElementById('generate')
-  viewSwitch(na, generate)
-  generate.textContent = 'Click to generate your number'
 
   sendData(data)
     .then(result => console.log(result))
