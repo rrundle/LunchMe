@@ -296,7 +296,7 @@ app.post('/postmates', function(req, res) {
   client.messages.create({
       to: '+1' + req.body.data.dropoff.phone_number.replace(/\D/g,''),
       from: '+16266583335',
-      body: 'Status of order #' + req.body.data.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '. Expected delivery time is: ' + req.body.data.dropoff_eta + '.',
+      body: 'Status of order #' + req.body.data.id + ': Your ' + req.body.data.manifest.description + ' from ' + req.body.data.pickup.name + ' is in ' + req.body.data.status + '.',
   }, function(err, message) {
       console.log(message.sid)
   })
@@ -310,11 +310,11 @@ app.get('/number', function(req, res) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
 
-    client.incomingPhoneNumbers.create({
-      phoneNumber: number.phone_number
-    }, function(err, purchasedNumber) {
-      console.log(purchasedNumber.sid)
-    })
+    //client.incomingPhoneNumbers.create({
+      //phoneNumber: number.phone_number
+    //}, function(err, purchasedNumber) {
+      //console.log(purchasedNumber.sid)
+    //})
   })
 })
 

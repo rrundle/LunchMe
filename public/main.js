@@ -4,6 +4,8 @@ var legend = document.querySelector('.orders')
 function viewSwitch(hide, view) {
   hide.style.visibility = 'hidden'
   view.style.visibility = 'visible'
+  var account = document.querySelector('.account')
+  hideForm(account)
 }
 
 function submitForm(event) {
@@ -26,8 +28,13 @@ function submitForm(event) {
   customer.setAttribute('class', 'user')
 
   var success = document.createElement('div')
-  success.textContent = 'Success! You are now ready to start using LunchMe! See below for how to place an order.'
+  var hand = document.createElement('span')
+  hand.setAttribute('class', 'hand shake animated infinite')
+  hand.textContent = '👉'
+
+  success.textContent = 'Success! Now generate your unique text-to number '
   success.setAttribute('id', 'success')
+  success.appendChild(hand)
   customer.appendChild(success)
 
   var id = document.createElement('div')
@@ -67,7 +74,7 @@ function submitForm(event) {
   var na = document.getElementById('phone-text')
   var generate = document.getElementById('generate')
   viewSwitch(na, generate)
-  generate.textContent = 'Click to generate your number'
+  generate.textContent = 'Generate your number'
 
   var path = '/signup'
   sendData(data, path)
@@ -106,16 +113,19 @@ function saveEmoji(event) {
   sendData(data, path)
     .then(result => console.log(result))
 
-  var update = document.createElement('span')
-  update.setAttribute('id', 'update')
-  update.textContent = "Preferences saved!"
-  var save = document.getElementById('save')
+  var preferenceSaved = document.createElement('span')
+  preferenceSaved.setAttribute('id', 'preference-saved')
+  preferenceSaved.textContent = "Preferences saved! 🎉"
+  var orders= document.querySelector('.orders')
 
-  notify(update, save)
+  notify(preferenceSaved, orders)
 }
 
 function notify(elementOne, elementTwo) {
   elementTwo.appendChild(elementOne)
+  setTimeout(function() {
+    elementOne.textContent = ''
+  }, 4000)
 }
 
 function registerNumber(response) {
@@ -125,6 +135,17 @@ function registerNumber(response) {
     twilio: response,
   }
   sendNumber(data)
+
+  var next = document.createElement('div')
+  next.setAttribute('id', 'next')
+  next.textContent = 'You\'re ready to go! Check out how to text your orders below 👇'
+  var generate = document.getElementById('generate')
+  generate.appendChild(next)
+
+  var hand = document.createElement('span')
+  hand.setAttribute('class', 'hand animated shake infinite')
+  hand.textContent = '👈'
+  next.appendChild(hand)
 }
 
 function sendData(data, path) {
@@ -149,7 +170,7 @@ function displayTwilio(number) {
   phone.textContent = number
   var generate = document.getElementById('generate')
   var twilio = document.getElementById('phone-text')
-  twilio.setAttribute('class', 'text shape')
+  twilio.setAttribute('class', 'text')
   viewSwitch(generate, twilio)
 }
 
@@ -185,7 +206,7 @@ function showUser(user) {
   customer.appendChild(id)
 
   var success = document.createElement('div')
-  success.textContent = 'Welcome back! Happy lunching!'
+  success.textContent = 'Welcome back ' + user[0].name + '! Happy lunching!'
   success.setAttribute('id', 'success')
   customer.appendChild(success)
 
@@ -255,10 +276,15 @@ function showUser(user) {
 }
 
 function noMatch() {
-  var error = document.createElement('span')
-  var email = document.getElementById('email-button')
-  email.appendChild(error)
-  error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
+  var error = document.createElement('div')
+  error.setAttribute('id', 'sorry')
+  var login = document.querySelector('.login')
+  login.appendChild(error)
+  error.textContent = 'Sorry, no match. Set up your account over there '
+  var hand = document.createElement('span')
+  hand.setAttribute('class', 'hand animated shake infinite')
+  hand.textContent = '👈'
+  error.appendChild(hand)
 }
 
 function sendEmail(data, path) {
@@ -287,20 +313,29 @@ function useValue() {
           var update = document.createElement('span')
           update.setAttribute('id', 'update')
           update.textContent = "Already taken 😳"
-          var email = document.getElementById('email')
+          var title = document.getElementById('account-title')
 
-          notify(update, email)
-
+          notify(update, title)
           submit.disabled = true
         }
         else {
-          console.log('proceed')
+          var proceed = document.createElement('span')
+          proceed.setAttribute('id', 'proceed')
+          proceed.textContent = "Available 👍"
+          var account = document.getElementById('account-title')
+
+          notify(proceed, account)
           submit.disabled = false
         }
       })
     console.log(NameValue)
 }
 
+function hideForm(element) {
+  if (element.style.visibility === 'hidden') {
+    element.style.height = '0px'
+  }
+}
 
 form.addEventListener('submit', submitForm)
 
@@ -332,7 +367,7 @@ emailValidationInput.addEventListener('focus', function(e) {
 
 document.addEventListener('click', function(e) {
   if (e.target.id.indexOf('login-button') !== -1) {
-    var loginButton = document.getElementById('login-button')
+    var loginButton = document.querySelector('.login')
     var email = document.createElement('div')
     var login = document.createElement('input')
     var submit = document.createElement('span')
@@ -341,14 +376,14 @@ document.addEventListener('click', function(e) {
     loginButton.appendChild(login)
     loginButton.appendChild(submit)
 
-    email.setAttribute('class', 'check-email animated fadeIn')
+    email.setAttribute('class', 'check-email')
     email.textContent = 'Enter your email address: '
 
-    login.setAttribute('class', 'check-email animated fadeIn')
+    login.setAttribute('class', 'check-email')
     login.setAttribute('placeholder', 'sallydavis@email.com')
     login.setAttribute('id', 'email-input')
 
-    submit.setAttribute('class', 'check-email animated fadeIn')
+    submit.setAttribute('class', 'check-email')
     submit.setAttribute('id', 'email-button')
     submit.textContent = 'Submit'
   }
