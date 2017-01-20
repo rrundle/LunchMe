@@ -236,6 +236,10 @@ input[type=submit]{
   cursor: pointer;
 }
 
+#save {
+margin-bottom: 20px;
+}
+
 #phone-number {
   height: 60px;
   margin: 0 auto;
@@ -253,7 +257,7 @@ input[type=submit]{
 }
 
 #success {
-  font-weight: .4em;
+  font-size: .7em;
   color: #094aa8;
   padding: 10px;
   height: 60px;

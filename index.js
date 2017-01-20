@@ -3,12 +3,12 @@ var express = require('express')
 var app = express()
 
 var twilio = require('twilio')
-var accountSid = 'AC8531d011f7354e888b1ff5814ede7216'
-var authToken = '25d3020b826467462385f76a53dd9caa'
+var accountSid = process.env.TWILIO_ACCOUNT_SID
+var authToken = process.env.TWILIO_AUTH_TOKEN
 var client = require('twilio')(accountSid, authToken)
 
 var Postmates = require('postmates')
-var postmates = new Postmates('cus_L6EryomNUdlkLV', 'dfca5181-e047-4e91-8233-d9229eb4b19c')
+var postmates = new Postmates('cus_L6EryomNUdlkLV', process.env.POSTMATES_KEY)
 
 var emoji = require('node-emoji')
 
@@ -310,11 +310,12 @@ app.get('/number', function(req, res) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
 
-    //client.incomingPhoneNumbers.create({
-      //phoneNumber: number.phone_number
-    //}, function(err, purchasedNumber) {
-      //console.log(purchasedNumber.sid)
-    //})
+    client.incomingPhoneNumbers.create({
+      phoneNumber: number.phone_number,
+      SmsUrl: 'https://7a1cd9c1.ngrok.io/sms'
+    }, function(err, purchasedNumber) {
+      console.log(purchasedNumber.sid)
+    })
   })
 })
 
