@@ -85,63 +85,66 @@
         </div>
       </div>
       <div class="legend">
-        <table>
-          <tr>
-            <th scope="col">Emoji</th>
-            <th scope="col">Location</th>
-            <th scope="col">Order</th>
-          </tr>
-          <tr>
-            <td>🍕</td>
-            <td>Sgt. Pepperonis Pizza</td>
-            <td>Large cheese pizza</td>
-          </tr>
-          <tr>
-            <td>🐼</td>
-            <td>Panda Express</td>
-            <td>2 item combo, all chow mein, orange chicken, honey walnut shrimp</td>
-          </tr>
-          <tr>
-            <td>🐔</td>
-            <td>Chick-Fila-A</td>
-            <td>Spicy chicken sandwich meal, coke</td>
-          </tr>
-          <tr>
-            <td>🍔</td>
-            <td>In-N-Out</td>
-            <td>#1 plain, large coke</td>
-          </tr>
-          <tr>
-            <td>🌯</td>
-            <td>Chipotle</td>
-            <td>Burrito, all rice, steak, medium salsa, lettuce, cheese, Large Coke'</td>
-          </tr>
-          <tr>
-            <td>🍣</td>
-            <td>Ten Asian Bistro</td>
-            <td>Dragon roll, shrimp tempura roll - large</td>
-          </tr>
-          <tr>
-            <td>🍱</td>
-            <td>Tokio Grill</td>
-            <td>Teriyaki chicken bento, miso soup, bottled water</td>
-          </tr>
-          <tr>
-            <td>🇻🇳</td>
-            <td>Pho Ba Co</td>
-            <td>Charbroiled beef pho, spring rolls</td>
-          </tr>
-          <tr>
-            <td>❤️</td>
-            <td>Ikes Love &amp; Sandwiches</td>
-            <td>Little mermaid on dutch crunch, no lettuce or tomatoes</td>
-          </tr>
-          <tr>
-            <td>💊</td>
-            <td>CVS Pharmacy</td>
-            <td>Natures Made multivitamin, 6-pack coke, Tide liquid detergent, 4 snickers bars</td>
-          </tr>
-        </table>
+        <form class="orders">
+          <table>
+            <tr>
+              <th scope="col">Emoji</th>
+              <th scope="col">Location</th>
+              <th scope="col">Order</th>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-pizza">🍕</td>
+              <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
+              <td><input class="emoji-input" id="sgt-peps" type="text" name="pizza" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-panda">🐼</td>
+              <td class="legend-res" id="legend-express">Panda Express</td>
+              <td><input class="emoji-input" id="panda" type="text" name="panda" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-chicken">🐔</td>
+              <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
+              <td><input class="emoji-input" id="chicken" type="text" name="chicken" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-burger">🍔</td>
+              <td class="legend-res" id="legend-innout">In-N-Out</td>
+              <td><input class="emoji-input" id="burger" type="text" name="burger" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-burrito">🌯</td>
+              <td class="legend-res" id="legend-chipotle">Chipotle</td>
+              <td><input class="emoji-input" id="burrito" type="text" name="burrito" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-sushi">🍣</td>
+              <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
+              <td><input class="emoji-input" id="sushi" type="text" name="sushi" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-bento">🍱</td>
+              <td class="legend-res" id="legend-tokio">Tokio Grill</td>
+              <td><input class="emoji-input" id="bento" type="text" name="bento" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-viet">🇻🇳</td>
+              <td class="legend-res" id="legend-pho">Pho Ba Co</td>
+              <td><input class="emoji-input" id="pho" type="text" name="viet" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-heart">❤️</td>
+              <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
+              <td><input class="emoji-input" id="heart" type="text" name="heart" value=""></td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-pill">💊</td>
+              <td id="legend-cvs">CVS Pharmacy</td>
+              <td><input class="emoji-input" id="pill" type="text" name="pill" value=""></td>
+            </tr>
+          </table>
+          <input id="save" type="submit" name="save" value="Save">
+        </form>
       </div>
     </div>
     <script src="main.js"></script>

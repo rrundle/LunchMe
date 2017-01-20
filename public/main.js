@@ -1,4 +1,5 @@
 var form = document.querySelector('.account')
+var legend = document.querySelector('.orders')
 
 function viewSwitch(hide, view) {
   hide.style.visibility = 'hidden'
@@ -6,6 +7,7 @@ function viewSwitch(hide, view) {
 }
 
 function submitForm(event) {
+
   event.preventDefault()
   var formData = new FormData(event.target)
   var data = {
@@ -28,8 +30,11 @@ function submitForm(event) {
   success.setAttribute('id', 'success')
   customer.appendChild(success)
 
-  var name  = document.createElement('div')
+  var id = document.createElement('div')
+  id.setAttribute('id', 'id')
+  customer.appendChild(id)
 
+  var name  = document.createElement('div')
   name.textContent = formData.get('name')
   name.setAttribute('id', 'name-results')
   customer.appendChild(name)
@@ -59,12 +64,52 @@ function submitForm(event) {
 
   accountInfo.appendChild(customer)
 
-  sendData(data)
+  var na = document.getElementById('phone-text')
+  var generate = document.getElementById('generate')
+  viewSwitch(na, generate)
+  generate.textContent = 'Click to generate your number'
+
+  var path = '/signup'
+  sendData(data, path)
     .then(result => console.log(result))
 
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
   viewSwitch(inputs, user)
+}
+
+function notify(elementOne, elementTwo) {
+  elementTwo.appendChild(elementOne)
+
+}
+
+function saveEmoji(event) {
+  event.preventDefault()
+  var formData = new FormData(event.target)
+  var id = document.getElementById('id')
+  var userId = id.getAttribute('class')
+  var data = {
+    id: userId,
+    peps_manifest: formData.get('pizza'),
+    panda_manifest: formData.get('panda'),
+    fila_manifest: formData.get('chicken'),
+    innout_manifest: formData.get('burger'),
+    chipotle_manifest: formData.get('burrito'),
+    ten_manifest: formData.get('sushi'),
+    tokio_manifest: formData.get('bento'),
+    pho_manifest: formData.get('viet'),
+    ikes_manifest: formData.get('heart'),
+    cvs_manifest: formData.get('pill')
+  }
+  var path = '/preferences'
+  sendData(data, path)
+    .then(result => console.log(result))
+
+  var update = document.createElement('span')
+  update.setAttribute('id', 'update')
+  update.textContent = "Preferences saved!"
+  var save = document.getElementById('save')
+  notify(update, save)
 }
 
 function registerNumber(response) {
@@ -76,16 +121,21 @@ function registerNumber(response) {
   sendNumber(data)
 }
 
-function sendData(data) {
+function sendData(data, path) {
   var options = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   }
-  var result = fetch('/signup', options)
+  var result = fetch(path, options)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => addId(data))
   return result
+}
+
+function addId(id) {
+  var idBadge = document.getElementById('id')
+  idBadge.setAttribute('class', id)
 }
 
 function displayTwilio(number) {
@@ -117,10 +167,16 @@ function emailMatches(array) {
 }
 
 function showUser(user) {
+
   var accountInfo = document.getElementById('account-info')
 
   var customer = document.createElement('div')
   customer.setAttribute('class', 'user')
+
+  var id = document.createElement('div')
+  id.setAttribute('id', 'id')
+  id.setAttribute('class', user[0].id)
+  customer.appendChild(id)
 
   var success = document.createElement('div')
   success.textContent = 'Welcome back! Happy lunching!'
@@ -154,6 +210,36 @@ function showUser(user) {
 
   var twilio = document.getElementById('phone-text')
   twilio.textContent = user[0].twilio
+
+  var peps = document.getElementById('sgt-peps')
+  peps.setAttribute('value', user[0].peps_manifest)
+
+  var panda = document.getElementById('panda')
+  panda.setAttribute('value', user[0].panda_manifest)
+
+  var chicken = document.getElementById('chicken')
+  chicken.setAttribute('value', user[0].fila_manifest)
+
+  var burger = document.getElementById('burger')
+  burger.setAttribute('value', user[0].innout_manifest)
+
+  var burrito = document.getElementById('burrito')
+  burrito.setAttribute('value', user[0].chipotle_manifest)
+
+  var sushi = document.getElementById('sushi')
+  sushi.setAttribute('value', user[0].ten_manifest)
+
+  var bento = document.getElementById('bento')
+  bento.setAttribute('value', user[0].tokio_manifest)
+
+  var pho = document.getElementById('pho')
+  pho.setAttribute('value', user[0].pho_manifest)
+
+  var heart = document.getElementById('heart')
+  heart.setAttribute('value', user[0].ikes_manifest)
+
+  var pill = document.getElementById('pill')
+  pill.setAttribute('value', user[0].cvs_manifest)
 
   var inputs = document.querySelector('.account')
   viewSwitch(inputs, customer)
@@ -218,3 +304,5 @@ document.addEventListener('click', function(e) {
       .then(data => registerNumber(data))
   }
 })
+
+legend.addEventListener('submit', saveEmoji)
