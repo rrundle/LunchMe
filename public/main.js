@@ -73,6 +73,9 @@ function submitForm(event) {
   sendData(data, path)
     .then(result => console.log(result))
 
+  var save = document.getElementById('save')
+  save.disabled = false
+
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
   viewSwitch(inputs, user)
@@ -241,6 +244,9 @@ function showUser(user) {
   var pill = document.getElementById('pill')
   pill.setAttribute('value', user[0].cvs_manifest)
 
+  var save = document.getElementById('save')
+  save.disabled = false
+
   var inputs = document.querySelector('.account')
   viewSwitch(inputs, customer)
 }
@@ -265,6 +271,7 @@ function sendEmail(data, path) {
 
 function useValue() {
     var NameValue = emailValidationInput.value
+    var submit = document.getElementById('submit')
     var data = {
       email: NameValue
     }
@@ -274,9 +281,11 @@ function useValue() {
         {
         if (result.length > 0) {
           console.log("found a match!")
+          submit.disabled = true
         }
         else {
-          console.log('something went wrong')
+          console.log('proceed')
+          submit.disabled = false
         }
       })
     console.log(NameValue)
