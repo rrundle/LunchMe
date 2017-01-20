@@ -73,21 +73,21 @@ function submitForm(event) {
   sendData(data, path)
     .then(result => console.log(result))
 
+  var save = document.getElementById('save')
+  save.disabled = false
+
   var inputs = document.querySelector('.account')
   var user = document.querySelector('.user')
   viewSwitch(inputs, user)
 }
 
-function notify(elementOne, elementTwo) {
-  elementTwo.appendChild(elementOne)
-
-}
-
 function saveEmoji(event) {
+
   event.preventDefault()
   var formData = new FormData(event.target)
   var id = document.getElementById('id')
   var userId = id.getAttribute('class')
+
   var data = {
     id: userId,
     peps_manifest: formData.get('pizza'),
@@ -101,6 +101,7 @@ function saveEmoji(event) {
     ikes_manifest: formData.get('heart'),
     cvs_manifest: formData.get('pill')
   }
+
   var path = '/preferences'
   sendData(data, path)
     .then(result => console.log(result))
@@ -109,7 +110,12 @@ function saveEmoji(event) {
   update.setAttribute('id', 'update')
   update.textContent = "Preferences saved!"
   var save = document.getElementById('save')
+
   notify(update, save)
+}
+
+function notify(elementOne, elementTwo) {
+  elementTwo.appendChild(elementOne)
 }
 
 function registerNumber(response) {
@@ -241,6 +247,9 @@ function showUser(user) {
   var pill = document.getElementById('pill')
   pill.setAttribute('value', user[0].cvs_manifest)
 
+  var save = document.getElementById('save')
+  save.disabled = false
+
   var inputs = document.querySelector('.account')
   viewSwitch(inputs, customer)
 }
@@ -251,6 +260,47 @@ function noMatch() {
   email.appendChild(error)
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
+
+function sendEmail(data, path) {
+  var options = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }
+  var result = fetch(path, options)
+    .then(res => res.json())
+  return result
+}
+
+function useValue() {
+    var NameValue = emailValidationInput.value
+    var submit = document.getElementById('submit')
+    var data = {
+      email: NameValue
+    }
+    var path = '/email'
+    sendEmail(data, path)
+      .then(result =>
+        {
+        if (result.length > 0) {
+
+          var update = document.createElement('span')
+          update.setAttribute('id', 'update')
+          update.textContent = "Already taken 😳"
+          var email = document.getElementById('email')
+
+          notify(update, email)
+
+          submit.disabled = true
+        }
+        else {
+          console.log('proceed')
+          submit.disabled = false
+        }
+      })
+    console.log(NameValue)
+}
+
 
 form.addEventListener('submit', submitForm)
 
@@ -269,6 +319,14 @@ document.addEventListener('click', function(e) {
         }
       })
       .catch((error) => console.log(error))
+  }
+})
+
+var emailValidationInput = document.getElementById('email')
+emailValidationInput.addEventListener('focus', function(e) {
+  console.log(e.target.id.indexOf('email'))
+  if (e.target.id.indexOf('email') !== -1) {
+    emailValidationInput.onblur = useValue
   }
 })
 
