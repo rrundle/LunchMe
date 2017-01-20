@@ -215,6 +215,19 @@ app.post('/signup', function(req, res) {
     .catch((error) => res.send('Sorry, could not insert that user', error))
 })
 
+app.post('/email', function(req, res) {
+  console.log(req.body.email)
+  var query = knex('users')
+    .where({
+      email: req.body.email,
+    })
+    .select()
+    .returning()
+  query
+    .then(user => res.json(user))
+    .catch((error) => res.send('Sorry, could not get emails', error))
+})
+
 app.post('/preferences', function(req, res) {
   var query = knex('users')
     .where({

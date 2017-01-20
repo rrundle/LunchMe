@@ -252,6 +252,37 @@ function noMatch() {
   error.textContent = 'Sorry, no match. Set up your account over there 👈 .'
 }
 
+function sendEmail(data, path) {
+  var options = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }
+  var result = fetch(path, options)
+    .then(res => res.json())
+  return result
+}
+
+function useValue() {
+    var NameValue = emailValidationInput.value
+    var data = {
+      email: NameValue
+    }
+    var path = '/email'
+    sendEmail(data, path)
+      .then(result =>
+        {
+        if (result.length > 0) {
+          console.log("found a match!")
+        }
+        else {
+          console.log('something went wrong')
+        }
+      })
+    console.log(NameValue)
+}
+
+
 form.addEventListener('submit', submitForm)
 
 document.addEventListener('click', function(e) {
@@ -269,6 +300,14 @@ document.addEventListener('click', function(e) {
         }
       })
       .catch((error) => console.log(error))
+  }
+})
+
+var emailValidationInput = document.getElementById('email')
+emailValidationInput.addEventListener('focus', function(e) {
+  console.log(e.target.id.indexOf('email'))
+  if (e.target.id.indexOf('email') !== -1) {
+    emailValidationInput.onblur = useValue
   }
 })
 
