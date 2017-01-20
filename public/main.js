@@ -81,16 +81,13 @@ function submitForm(event) {
   viewSwitch(inputs, user)
 }
 
-function notify(elementOne, elementTwo) {
-  elementTwo.appendChild(elementOne)
-
-}
-
 function saveEmoji(event) {
+
   event.preventDefault()
   var formData = new FormData(event.target)
   var id = document.getElementById('id')
   var userId = id.getAttribute('class')
+
   var data = {
     id: userId,
     peps_manifest: formData.get('pizza'),
@@ -104,6 +101,7 @@ function saveEmoji(event) {
     ikes_manifest: formData.get('heart'),
     cvs_manifest: formData.get('pill')
   }
+
   var path = '/preferences'
   sendData(data, path)
     .then(result => console.log(result))
@@ -112,7 +110,12 @@ function saveEmoji(event) {
   update.setAttribute('id', 'update')
   update.textContent = "Preferences saved!"
   var save = document.getElementById('save')
+
   notify(update, save)
+}
+
+function notify(elementOne, elementTwo) {
+  elementTwo.appendChild(elementOne)
 }
 
 function registerNumber(response) {
@@ -280,7 +283,14 @@ function useValue() {
       .then(result =>
         {
         if (result.length > 0) {
-          console.log("found a match!")
+
+          var update = document.createElement('span')
+          update.setAttribute('id', 'update')
+          update.textContent = "Already taken 😳"
+          var email = document.getElementById('email')
+
+          notify(update, email)
+
           submit.disabled = true
         }
         else {
