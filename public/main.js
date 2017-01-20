@@ -268,9 +268,6 @@ function showUser(user) {
   var pill = document.getElementById('pill')
   pill.setAttribute('value', user[0].cvs_manifest)
 
-  var save = document.getElementById('save')
-  save.disabled = false
-
   var inputs = document.querySelector('.account')
   viewSwitch(inputs, customer)
 }
@@ -308,7 +305,10 @@ function useValue() {
     sendEmail(data, path)
       .then(result =>
         {
-        if (result.length > 0) {
+        if (NameValue === '') {
+            submit.disabled = true
+        }
+        else if (result.length > 0) {
 
           var update = document.createElement('span')
           update.setAttribute('id', 'update')
@@ -328,7 +328,6 @@ function useValue() {
           submit.disabled = false
         }
       })
-    console.log(NameValue)
 }
 
 function hideForm(element) {

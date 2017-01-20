@@ -230,6 +230,16 @@ input[type=submit]{
   width: 200px;
 }
 
+.save[disabled] {
+  color: #d0d0d0;
+  border-color: #d0d0d0;
+}
+
+.save[disabled]:hover {
+  color: #d0d0d0;
+  border-color: #d0d0d0;
+}
+
 .save:hover {
   color: black;
   border-color: black;
