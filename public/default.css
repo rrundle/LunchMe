@@ -1,23 +1,58 @@
 body {
   font-family: Roboto;
-  background-image: url('http://i.imgur.com/pcRNVdx.png');
-  background-repeat: repeat;
   color: #324552;
 }
 
-.logo {
-  width: 50%;
+.form-all {
+  background: transparent !important;
+}
+
+#background-image {
+  background: url('http://i.imgur.com/fZqrK1a.jpg') no-repeat center top fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%vh;
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+#overlay {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  opacity: .92;
+}
+
+#overlay:last-of-type {
+  opacity: .92;
+}
+
+.content {
   margin: auto;
-  left: 50%;
+  position: relative;
+  width: 90%;
+}
+
+.logo {
+  width: 270px;
+  position: relative;
+  margin-top: 15px;
 }
 
 #logo {
   font-family: Luckiest Guy;
-  font-size: 3em;
+  font-size: 2em;
   color: #094aa8;
-  margin-left: auto;
-  margin-right: auto;
-  width: 75%;
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 50%;
+  text-align: center;
 }
 
 #me {
@@ -26,57 +61,131 @@ body {
 
 #bag {
   color: blue;
-  width: 50px;
+  width: 30px;
 }
 
 .pitch {
-  padding: 25px 0 50px;
-  margin-left: 250px;
-  margin-right: 250px;
-  font-size: 1.5em;
+  padding: 0px 0 25px 15px;
+  font-size: 1em;
+  text-align: left;
+  position: relative;
 }
 
 .setup {
-  border: solid 1px #d0d0d0;
-  height: 500px;
   width: 45%;
   display: inline-block;
 }
 
+.account {
+  float: left;
+  margin: auto;
+}
+
+.signup {
+
+}
+
+input {
+  margin: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  width: 110%;
+  font-size: 1em;
+  border-radius: 3px;
+}
+
 .login {
-  height: 200px;
+  height: 100px;
+  position: absolute;
+  border: none;
+  top: 10px;
+  right: 40px;;
+  width: 350px;
+  z-index: 10;
+  }
+
+.check-email {
+  margin-top: 15px;
+  text-align: center;
+  z-index: 10;
+}
+
+#have-account{
+  text-align: center;
+}
+
+#email-button {
+  width: 100px;
+  border: solid 2px #094aa8;
+  top: 15px;;
+  margin-left: 38%;
+  font-weight: bold;
+  color: #094aa8;
+  padding: 10px 15px;;
+  text-align: center;
+}
+
+#email-button:hover {
+  border-color: black;
+  color: black;
+  cursor: pointer;
 }
 
 #login-button {
   width: 150px;
-  height: 50px;
-  border: solid 1px #d0d0d0
+  border: solid 3px #094aa8;
+  border-radius: 3px;
+  text-align: center;
+  margin: auto;
+  color: #094aa8;
+  font-weight: bolder;
+  padding: 15px 0;
 }
 
 #login-button:hover {
   cursor: pointer;
+  border-color: #000;
+  color: #000;
+}
+
+#sorry {
+  color: #cf0814;
+  margin-top: 15px;
 }
 
 #account-info {
-  width: 50%;
+  width: 60%;
   min-width: 390px;
+}
+
+#twilio-info {
+  width: 40%;
+  min-width: 390px;
+  height: 250px;
+  float: right;
+  display: inline-block;
+  border: none;
+  margin-top: 12%;
+}
+
+#phone-title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 100;
+  margin-bottom: 50px;
+}
+
+#text-to {
+  font-weight: 700;
+  color: #094aa8;
 }
 
 #account-title {
   font-size: 1.3em;
   font-weight: bold;
   padding: 10px 10px 10px;
-}
-
-.account {
-  float: left;
-}
-
-input {
-  margin: 15px;
-  padding: 15px;
-  width: 90%;
-  font-size: 1em;
+  position: relative;
 }
 
 #name {
@@ -104,39 +213,110 @@ input {
   clear: left;
 }
 
-#submit {
+input[type=submit]{
   height: 50px;
   padding: 15px;
-  width: 50%;
   margin-left: auto;
   margin-right: auto;
-
+  background-color: transparent;
 }
 
-#twilio-info {
-  width: 25%
-  min-width: 390px;
-  height: 250px;
-  float: right;
-  position: absolute;
-  top: 400px;
-  display: block;
-  left: 50%;
+.save {
+  border: solid 3px #094aa8;
+  color: #094aa8;
+  font-weight: bold;
+  margin: auto;
+  margin-top: 15px;
+  width: 200px;
+}
+
+.save[disabled] {
+  color: #d0d0d0;
+  border-color: #d0d0d0;
+}
+
+.save[disabled]:hover {
+  color: #d0d0d0;
+  border-color: #d0d0d0;
+  cursor: default;
+}
+
+.save:hover {
+  color: black;
+  border-color: black;
+  cursor: pointer;
+}
+
+#save {
+margin-bottom: 20px;
 }
 
 #phone-number {
   height: 60px;
   margin: 0 auto;
   transform: translateY(-50%);
-  width: 320px;
+  width: 370px;
   margin: auto;
-  top: 350px;
 }
 
 .user {
   visibility: hidden;
+  height: 450px;
+  padding: 15px;
+  font-size: 2em;
+  font-style: italic;
+}
+
+#success {
+  font-size: .7em;
+  color: #094aa8;
+  padding: 10px;
+  height: 60px;
+}
+
+#name-results {
+  font-weight: 1.3em;
+  padding: 10px;
+}
+
+#address-results {
+  font-weight: 1.3em;
+  padding: 10px;
+}
+
+#city-results {
+  font-weight: 1.3em;
+  padding: 10px;
+}
+
+#phone-results {
+  font-weight: 1.3em;
+  padding: 10px;
+}
+
+#email-results {
+  font-weight: 1.3em;
+  padding: 10px;
+}
+
+#update {
+  width: 175px;
+  height: 30px;
+  margin-left: 55%;
+  margin-top: 15px;
+  color: #cf0814;
+  font-size: .85em;
   position: absolute;
-  top: 300px;
+}
+
+#proceed {
+  width: 175px;
+  height: 30px;
+  margin-left: 55%;
+  margin-top: 15px;
+  color: #3bbf3e;
+  font-size: .85em;
+  position: absolute;
 }
 
 .shape {
@@ -152,9 +332,22 @@ input {
   font-size: 22px;
   letter-spacing: 8px;
   line-height: 32px;
-  position: relative;
-  top: -48px;
   text-align: center;
+  top: -48px;
+}
+
+.svg-wrapper {
+  height: 60px;
+  margin: 0 auto;
+  position: relative;
+  top: 5%;
+  transform: translateY(-50%);
+  width: 320px;
+}
+
+.svg-wrapper:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
 }
 
 @keyframes draw {
@@ -170,6 +363,11 @@ input {
   }
 }
 
+#phone-text {
+  font-size: 2.5em;
+  font-weight: lighter;
+}
+
 #phone-text:hover {
   -webkit-animation: 0.5s draw linear forwards;
   animation: 0.5s draw linear forwards;
@@ -177,65 +375,164 @@ input {
 }
 
 .tutorial {
-  border: solid 1px #d0d0d0;
-  margin-top: 500px;
+  border: solid 1px #094aa8;
+  margin-top: 40px;
+  height: 420px;
+  float:left;
+}
+
+img {
+  height: 35px;
+}
+
+.step {
+  font-weight: bold;
+}
+
+#order {
+  padding: 15px 15px 0 20px;;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
 .how-to {
   display: inline-block;
+  width: 31%;
+  height: 190px;
+  vertical-align: middle;
+  padding-left: 15px;
+}
+
+#how-1 {
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+li {
+  list-style: none;
+  font-size: 1.1em;
+  font-kerning: auto;
+  margin: 5px 8px;
+}
+
+#phone-1 {
+  width: 100%;
+  top: 0;
+}
+
+#phone-2 {
+  width: 100%;
+  margin: auto;
+}
+
+#pizza {
+  width: 100%;
+  margin: auto;
 }
 
 .legend {
-  border: solid 1px #d0d0d0;
-}
-
-.footer {
-  background-color: #324552;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-#email-button {
-  height: 50px;
-  width: 100px;
+  margin-top: 50px;
+  float: left;
 }
 
 #email-input {
   width: 300px;
+  text-align: left;
 }
 
 #generate {
-  width: 200px;
-  height: 50px;
+  width: 250px;
+  margin: auto;
+  border: solid 3px #094aa8;
+  visibility: hidden;
+  text-align: center;
+  font-weight: bold;
+  padding: 25px 0;
+  color: #094aa8;
+}
+
+#generate:hover {
+  border-color: #000;
+  color: #000;
 }
 
 #generate:hover {
   cursor: pointer;
 }
 
-.save:hover {
-  cursor: pointer;
+#next {
+  position: absolute;
+  width: 400px;
+  height: 30px;
+  margin-top: 5%;
+  text-align: center;
+  color: #3bbf3e;
+  font-size: .85em;
+  position: absolute;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.hand {
+  font-size: 2em;
+}
+
+.emoji-input {
+  width: 350%;
+}
+
+.header {
+
+}
+
+.orders {
+  margin-top: 20px;
+}
+
+.legend-emoji {
+  font-size: 2em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.legend-res {
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.3em;
+}
+
+th {
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+#character {
+  font-weight: bold;
+  color: #094aa8;
+}
+
+#preference-saved {
+  position: absolute;
+  width: 250px;
+  height: 30px;
+  margin-left: 5%;
+  color: #3bbf3e;
+  font-size: .85em;
+  position: absolute;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.screenshots {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#screen-1 {
+  margin-left: 27%;
 }

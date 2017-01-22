@@ -4,147 +4,142 @@
     <meta charset="utf-8">
     <title>LunchMe | Order lunch with a text</title>
     <link type="text/css" rel="stylesheet" href="default.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <script src="https://use.fontawesome.com/7fdda3cfec.js"></script>
   </head>
   <body>
-    <div class="logo">
-      <span id="logo">Lunch<span id="me">Me</span></span>
-      <span id="lunch-bag"><img id="bag" src="http://i.imgur.com/MW5oYYA.png"></span>
-    </div>
-    <div class="pitch">
-      Some stuff about what LunchMe does.
-    </div>
-    <div class="content">
-      <div class="setup" id="account-info">
-        <div id="account-title">
-          Set up your account
-        </div>
-        <form name="account" class="account">
-          <input id="email" type="email" name="email" placeholder="ilovelunchme@gmail.com" required>
-          <input id="name" type="text" name="name" placeholder="First name or full name" required>
-          <input id="address" type="text" name="address" placeholder="123 Main St Suite 405" required>
-          <input id="city" type="text" name="city" placeholder="Anytown" required>
-          <input id="state" type="text" name="state" placeholder="FL" required>
-          <input id="zip" type="text" name="zip" placeholder="10101" required>
-          <input id="phone" type="tel" name="phone" placeholder="5556667777" required>
-          <input id="submit" type="submit" name="submit" disabled="disabled" value="Submit">
-        </form>
+    <div id="background-image">
+      <div id="overlay"></div>
+      <div class="logo">
+        <span id="logo">Lunch<span id="me">Me</span></span>
+        <span id="lunch-bag"><img id="bag" src="http://i.imgur.com/MW5oYYA.png"></span>
       </div>
       <div class="login setup">
-        <div id="have-account">Have and account? Log in here:</div>
         <div id="login-button">Login</div>
       </div>
-      <div class="setup" id="twilio-info">
-        <div id="phone-title">
-          Your <span id="text-to">text-to</span> number
-        </div>
-        <div class="svg-wrapper" id="phone-number">
-          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-            <rect class="shape" height="60" width="320" />
-          </svg>
-          <div id="generate"></div>
-          <div class="text" id="phone-text">N/A</div>
-        </div>
+      <div class="pitch">
+        Text emoji. Get lunch.
       </div>
-      <div class="tutorial">
-        <div id="order">
-          How to order
+      <div class="content">
+        <div class="setup" id="account-info">
+          <div id="account-title">
+            Set up your account
+          </div>
+          <form name="account" class="account">
+            <input class="signup" id="email" type="email" name="email" placeholder="Email address" required>
+            <input class="signup" id="name" type="text" name="name" placeholder="First name or full name" required>
+            <input class="signup" id="address" type="text" name="address" placeholder="Address" required>
+            <input class="signup" id="city" type="text" name="city" placeholder="City" required>
+            <input class="signup" id="state" type="text" name="state" placeholder="State" required>
+            <input class="signup" id="zip" type="text" name="zip" placeholder="Zipcode" required>
+            <input class="signup" id="phone" type="tel" name="phone" placeholder="Phone" required>
+            <input class="signup save" id="submit" type="submit" name="submit" disabled="disabled" value="Submit">
+          </form>
         </div>
         <div class="how-to" id="step-1">
-          <div id="instructions-1">
-            <div id="how-1">
-              <ul>
-                <li>Send a text to your <span>text-to</span> phone number with the following sytax:</li>
-                <li>Order 🍕</li>
-              </ul>
-            </div>
-            <img src="http://i.imgur.com/tMWpELW.png"/>
+          <div id="how-1">
+            <li class="step">Step 1</li>
+            <li>Fill out the emoji legend below with your favorite orders. <span class="hand">👇</span></li>
+            <li>This will be the delivery order each emoji represents.</li>
+            <li>Come back and update them at any time!</li>
           </div>
+        </div>
+        <div class="legend">
+          <form class="orders">
+            <table>
+              <tr>
+                <th class="header" scope="col">Emoji</th>
+                <th class="header" scope="col">Location</th>
+                <th class="header" scope="col">Order</th>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-pizza">🍕</td>
+                <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
+                <td><input class="emoji-input" id="sgt-peps" type="text" name="pizza" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-panda">🐼</td>
+                <td class="legend-res" id="legend-express">Panda Express</td>
+                <td><input class="emoji-input" id="panda" type="text" name="panda" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-chicken">🐔</td>
+                <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
+                <td><input class="emoji-input" id="chicken" type="text" name="chicken" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-burger">🍔</td>
+                <td class="legend-res" id="legend-innout">In-N-Out</td>
+                <td><input class="emoji-input" id="burger" type="text" name="burger" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-burrito">🌯</td>
+                <td class="legend-res" id="legend-chipotle">Chipotle</td>
+                <td><input class="emoji-input" id="burrito" type="text" name="burrito" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-sushi">🍣</td>
+                <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
+                <td><input class="emoji-input" id="sushi" type="text" name="sushi" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-bento">🍱</td>
+                <td class="legend-res" id="legend-tokio">Tokio Grill</td>
+                <td><input class="emoji-input" id="bento" type="text" name="bento" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-viet">🇻🇳</td>
+                <td class="legend-res" id="legend-pho">Pho Ba Co</td>
+                <td><input class="emoji-input" id="pho" type="text" name="viet" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-heart">❤️</td>
+                <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
+                <td><input class="emoji-input" id="heart" type="text" name="heart" value=""></td>
+              </tr>
+              <tr>
+                <td class="legend-emoji" id="legend-pill">💊</td>
+                <td class="legend-res" id="legend-cvs">CVS Pharmacy</td>
+                <td><input class="emoji-input" id="pill" type="text" name="pill" value=""></td>
+              </tr>
+            </table>
+            <input class="save" id="save" type="submit" name="save" disabled="disabled" value="Save">
+          </form>
         </div>
         <div class="how-to" id="step-2">
-          <div id="instructions-2">
-            <div id="how-2">
-              <ul>
-                <li>An order is placed based on the emoji legend below 👇.</li>
-                <li>You'll get a text confirmation that the order was placed.</li>
-                <li>You'll also get delivery updates as they change.</li>
-                <li>You also may have a courier contact you to clarify details in your order.</li>
-              </ul>
-            </div>
-            <img src="http://i.imgur.com/9tsiGGP.png"/>
+          <div id="how-2">
+            <ul>
+              <li class="step">Step 2</li>
+              <li>Send a text to your <span>text-to</span> phone number with the following sytax:</li>
+              <li>Order 🍕</li>
+              <li>The <span id="character">second character</span> in the text must be the emoji.</li>
+            </ul>
           </div>
+        </div>
+        <div class="setup" id="twilio-info">
+          <div id="phone-title">
+            Your <span id="text-to">text-to</span> number
+          </div>
+          <div class="svg-wrapper" id="phone-number">
+            <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+              <rect class="shape" height="60" width="320" />
+            </svg>
+            <div class="text" id="phone-text">-</div>
+          </div>
+          <div id="generate"></div>
         </div>
         <div class="how-to" id="step-3">
-          <div id="instructions-3">
-            <div id="how-3">
-              Answer door. Devour food. Rinse 💦 and repeat.
-            </div>
-            <img id="pizza" src="http://i.imgur.com/h14Rx2u.jpg"/>
+          <div id="how-3">
+            <ul>
+              <li class="step">Step 3</li>
+              <li>Receive text delivery updates</li>
+              <li>Answer door.</li>
+              <li>Devour food.</li>
+              <li>Rinse 💦 and repeat.</li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="legend">
-        <form class="orders">
-          <table>
-            <tr>
-              <th scope="col">Emoji</th>
-              <th scope="col">Location</th>
-              <th scope="col">Order</th>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-pizza">🍕</td>
-              <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
-              <td><input class="emoji-input" id="sgt-peps" type="text" name="pizza" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-panda">🐼</td>
-              <td class="legend-res" id="legend-express">Panda Express</td>
-              <td><input class="emoji-input" id="panda" type="text" name="panda" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-chicken">🐔</td>
-              <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
-              <td><input class="emoji-input" id="chicken" type="text" name="chicken" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-burger">🍔</td>
-              <td class="legend-res" id="legend-innout">In-N-Out</td>
-              <td><input class="emoji-input" id="burger" type="text" name="burger" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-burrito">🌯</td>
-              <td class="legend-res" id="legend-chipotle">Chipotle</td>
-              <td><input class="emoji-input" id="burrito" type="text" name="burrito" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-sushi">🍣</td>
-              <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
-              <td><input class="emoji-input" id="sushi" type="text" name="sushi" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-bento">🍱</td>
-              <td class="legend-res" id="legend-tokio">Tokio Grill</td>
-              <td><input class="emoji-input" id="bento" type="text" name="bento" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-viet">🇻🇳</td>
-              <td class="legend-res" id="legend-pho">Pho Ba Co</td>
-              <td><input class="emoji-input" id="pho" type="text" name="viet" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-heart">❤️</td>
-              <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
-              <td><input class="emoji-input" id="heart" type="text" name="heart" value=""></td>
-            </tr>
-            <tr>
-              <td class="legend-emoji" id="legend-pill">💊</td>
-              <td id="legend-cvs">CVS Pharmacy</td>
-              <td><input class="emoji-input" id="pill" type="text" name="pill" value=""></td>
-            </tr>
-          </table>
-          <input id="save" type="submit" name="save" disabled="disabled" value="Save">
-        </form>
       </div>
     </div>
     <script src="main.js"></script>
