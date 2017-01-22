@@ -221,7 +221,7 @@ function showUser(user) {
   customer.appendChild(address)
 
   var city  = document.createElement('div')
-  city.textContent =  user[0].city + ', ' + user[0].state + ', ' + user[0].zip
+  city.textContent =  user[0].city + ', ' + user[0].state + ', ' + user[0].zipcode
   city.setAttribute('id', 'city-results')
   customer.appendChild(city)
 
@@ -267,6 +267,9 @@ function showUser(user) {
 
   var pill = document.getElementById('pill')
   pill.setAttribute('value', user[0].cvs_manifest)
+
+  var save = document.getElementById('save')
+  save.disabled = false
 
   var inputs = document.querySelector('.account')
   viewSwitch(inputs, customer)
@@ -358,7 +361,6 @@ document.addEventListener('click', function(e) {
 
 var emailValidationInput = document.getElementById('email')
 emailValidationInput.addEventListener('focus', function(e) {
-  console.log(e.target.id.indexOf('email'))
   if (e.target.id.indexOf('email') !== -1) {
     emailValidationInput.onblur = useValue
   }

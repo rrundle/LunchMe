@@ -1,4 +1,3 @@
-//GLOBAL VARIABLES
 var express = require('express')
 var app = express()
 
@@ -27,7 +26,6 @@ var knex = connex({
 
 var PORT = 2999
 
-//Supported restaurants
 var orders = [
   {
     emoticon: emoji.get('pizza'),
@@ -131,7 +129,6 @@ var orders = [
   }
 ]
 
-//FUNCTIONS
 function makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number) {
   return {
     manifest: manifest,
@@ -150,41 +147,41 @@ function cantProcess(response, twilio) {
   response.end(twilio.toString())
 }
 
-function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio response*/) {
+function setOrder(array, obj, res) {
   var textString = obj.Body
   var space = ' '
   var arrayOfText = textString.split(space)
   var matches = []
-  for (var i = 0; i < orders.length; i++) {
-    if (orders[i].emoticon === arrayOfText[1]) {
+  for (var i = 0; i < arrayOfText.length; i++) {
+    for (var j = 0; j < orders.length; j++) {
+      if (arrayOfText[i] === orders[j].emoticon) {
 
-      matches.push(orders[i])
-      var pickup_name = orders[i].pickupName
-      var pickup_address = orders[i].order_address + ', ' + orders[i].order_city + ', ' + orders[i].order_state + ', ' + orders[i].order_zip
-      var pickup_phone_number = orders[i].pickupPhone
+        matches.push(orders[j])
+        var pickup_name = orders[j].pickupName
+        var pickup_address = orders[j].order_address + ', ' + orders[j].order_city + ', ' + orders[j].order_state + ', ' + orders[j].order_zip
+        var pickup_phone_number = orders[j].pickupPhone
 
-      //var manifest = orders[i].order
-      var dropoff_name = array[0].name
-      var dropoff_address = array[0].address + ', ' + array[0].city + ', ' + array[0].state + ', ' + array[0].zipcode
-      var dropoff_phone_number = array[0].phone
+        var dropoff_name = array[0].name
+        var dropoff_address = array[0].address + ', ' + array[0].city + ', ' + array[0].state + ', ' + array[0].zipcode
+        var dropoff_phone_number = array[0].phone
 
-      var item = array[0]
-      var match = orders[i].tableName
-      for (var property in item) {
-        if (match === property) {
-          var manifest = array[0][property]
+        var item = array[0]
+        var match = orders[j].tableName
+        for (var property in item) {
+          if (match === property) {
+            var manifest = array[0][property]
 
-          var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
-          postmates.new(delivery, function(err, confirm) {
-            var twiml = new twilio.TwimlResponse()
-            twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
-            res.writeHead(200, {'Content-Type': 'text/xml'})
-            res.end(twiml.toString())
-          })
+            var delivery = makeDelivery(manifest, pickup_name, pickup_address, pickup_phone_number, dropoff_name, dropoff_address, dropoff_phone_number)
+            postmates.new(delivery, function(err, confirm) {
+              var twiml = new twilio.TwimlResponse()
+              twiml.message('Thanks! We got your order! Your order number is ' + confirm.body.id + '. Your ' + manifest + ' from ' + pickup_name + ' is on its way!')
+              res.writeHead(200, {'Content-Type': 'text/xml'})
+              res.end(twiml.toString())
+            })
+          }
         }
       }
     }
-
   }
   if (matches.length === 0) {
     var twiml = new twilio.TwimlResponse()
@@ -193,7 +190,6 @@ function setOrder(array/*users array*/, obj/*text object*/, res/*for twilio resp
   }
 }
 
-//ROUTES AND MIDDLEWARE
 app.use(urlParser)
 app.use(jsonParser)
 app.use(express.static('public'))
