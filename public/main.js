@@ -71,11 +71,6 @@ function submitForm(event) {
 
   accountInfo.appendChild(customer)
 
-  var na = document.getElementById('phone-text')
-  var generate = document.getElementById('generate')
-  viewSwitch(na, generate)
-  generate.textContent = 'Generate your number'
-
   var path = '/signup'
   sendData(data, path)
     .then(result => console.log(result))
@@ -117,6 +112,11 @@ function saveEmoji(event) {
   preferenceSaved.setAttribute('id', 'preference-saved')
   preferenceSaved.textContent = "Preferences saved! 🎉"
   var orders= document.querySelector('.orders')
+
+  var na = document.getElementById('phone-text')
+  var generate = document.getElementById('generate')
+  viewSwitch(na, generate)
+  generate.textContent = 'Generate your number'
 
   notify(preferenceSaved, orders)
 }
@@ -372,10 +372,16 @@ document.addEventListener('click', function(e) {
     var email = document.createElement('div')
     var login = document.createElement('input')
     var submit = document.createElement('span')
+    var x = document.createElement('i')
 
+    loginButton.appendChild(x)
     loginButton.appendChild(email)
     loginButton.appendChild(login)
     loginButton.appendChild(submit)
+
+    x.setAttribute('class', ' check-email fa fa-times')
+    x.setAttribute('aria-hidden', 'true')
+    x.setAttribute('id', 'x')
 
     email.setAttribute('class', 'check-email')
     email.textContent = 'Enter your email address: '
@@ -400,3 +406,12 @@ document.addEventListener('click', function(e) {
 })
 
 legend.addEventListener('submit', saveEmoji)
+
+document.addEventListener('click', function(e) {
+  if (e.target.id.indexOf('x') !== -1) {
+    var login = document.querySelectorAll('.check-email')
+    login.forEach(function(login) {
+      login.parentNode.removeChild(login)
+    })
+  }
+})

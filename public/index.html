@@ -1,123 +1,245 @@
 <!DOCTYPE html>
 <html lang="en us">
-  <head>
-    <meta charset="utf-8">
-    <title>LunchMe | Order lunch with a text</title>
-    <link type="text/css" rel="stylesheet" href="default.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <script src="https://use.fontawesome.com/7fdda3cfec.js"></script>
-  </head>
-  <body>
-    <div id="background-image">
-      <div id="overlay"></div>
-      <div class="logo">
-        <span id="logo">Lunch<span id="me">Me</span></span>
-        <span id="lunch-bag"><img id="bag" src="http://i.imgur.com/MW5oYYA.png"></span>
+<head>
+  <meta charset="utf-8">
+  <title>LunchMe | Order lunch with a text</title>
+  <link type="text/css" rel="stylesheet" href="default.css">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/input.min.css">
+  <script src="https://use.fontawesome.com/7fdda3cfec.js"></script>
+</head>
+<body>
+  <div id="background-image">
+    <div id="overlay"></div>
+    <div class="logo">
+      <span id="logo">Lunch<span id="me">Me</span></span>
+      <span id="lunch-bag"><img id="bag" src="http://i.imgur.com/MW5oYYA.png"></span>
+    </div>
+    <div class="login setup">
+      <div id="login-button">Login</div>
+    </div>
+    <div class="pitch">
+      Text emoji. Get lunch.
+    </div>
+    <div class="content">
+      <div class="setup step-1" id="account-info">
+        <div class="step">
+          Step 1⃣
+        </div>
+        <div id="account-setup">
+          Set up your account
+        </div>
+        <form name="account" class="account">
+          <table>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="email" type="email" name="email" placeholder="Email address" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+                  This is what you'll use to login.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="name" type="text" name="name" placeholder="First name or full name" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+                  Name that your courier can idenitfy you by.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="address" type="text" name="address" placeholder="Address" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+                  Set as your delivery address.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="city" type="text" name="city" placeholder="City" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="state" type="text" name="state" placeholder="State" maxlength="2" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+                  eg: CA
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="zip" type="text" name="zip" placeholder="Zipcode" maxlength="5" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="signup" id="phone" type="tel" name="phone" placeholder="Phone" maxlength="10" required>
+                </div>
+              </td>
+              <td>
+                <div class="setup-descriptions">
+                  <p>So your courier can contact you if they have questions about your order.</p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="signup save" id="submit" type="submit" name="submit" disabled="disabled" value="Submit">
+              </td>
+            </tr>
+          </table>
+        </form>
       </div>
-      <div class="login setup">
-        <div id="login-button">Login</div>
+      <div class="legend step-2">
+        <div class="step">
+          Step 2⃣
+        </div>
+        <div id="emoji-setup">
+          Set up your preferences
+        </div>
+        <form class="orders">
+          <table>
+            <tr>
+              <th class="header" scope="col">Emoji</th>
+              <th class="header" scope="col">Location</th>
+              <th class="header" scope="col">Order</th>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-pizza">🍕</td>
+              <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="sgt-peps" type="text" name="pizza" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-panda">🐼</td>
+              <td class="legend-res" id="legend-express">Panda Express</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="panda" type="text" name="panda" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-chicken">🐔</td>
+              <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="chicken" type="text" name="chicken" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-burger">🍔</td>
+              <td class="legend-res" id="legend-innout">In-N-Out</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="burger" type="text" name="burger" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-burrito">🌯</td>
+              <td class="legend-res" id="legend-chipotle">Chipotle</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="burrito" type="text" name="burrito" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-sushi">🍣</td>
+              <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="sushi" type="text" name="sushi" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-bento">🍱</td>
+              <td class="legend-res" id="legend-tokio">Tokio Grill</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="bento" type="text" name="bento" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-viet">🇻🇳</td>
+              <td class="legend-res" id="legend-pho">Pho Ba Co</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="pho" type="text" name="viet" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-heart">❤️</td>
+              <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="heart" type="text" name="heart" value="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="legend-emoji" id="legend-pill">💊</td>
+              <td class="legend-res" id="legend-cvs">CVS Pharmacy</td>
+              <td>
+                <div class="ui fluid icon input">
+                  <input class="emoji-input" id="pill" type="text" name="pill" value="">
+                </div>
+              </td>
+            </tr>
+          </table>
+          <input class="save" id="save" type="submit" name="save" disabled="disabled" value="Save">
+        </form>
       </div>
-      <div class="pitch">
-        Text emoji. Get lunch.
-      </div>
-      <div class="content">
-        <div class="setup" id="account-info">
-          <div id="account-title">
-            Set up your account
+      <div class="how-to step-2" id="step-2">
+        <div class="setup step-3" id="twilio-info">
+          <div class="step">
+            Step 3⃣
           </div>
-          <form name="account" class="account">
-            <input class="signup" id="email" type="email" name="email" placeholder="Email address" required>
-            <input class="signup" id="name" type="text" name="name" placeholder="First name or full name" required>
-            <input class="signup" id="address" type="text" name="address" placeholder="Address" required>
-            <input class="signup" id="city" type="text" name="city" placeholder="City" required>
-            <input class="signup" id="state" type="text" name="state" placeholder="State" required>
-            <input class="signup" id="zip" type="text" name="zip" placeholder="Zipcode" required>
-            <input class="signup" id="phone" type="tel" name="phone" placeholder="Phone" required>
-            <input class="signup save" id="submit" type="submit" name="submit" disabled="disabled" value="Submit">
-          </form>
-        </div>
-        <div class="how-to" id="step-1">
-          <div id="how-1">
-            <li class="step">Step 1</li>
-            <li>Fill out the emoji legend below with your favorite orders. <span class="hand">👇</span></li>
-            <li>This will be the delivery order each emoji represents.</li>
-            <li>Come back and update them at any time!</li>
+          <div id="twilio-setup">
+            Set up your phone
           </div>
-        </div>
-        <div class="legend">
-          <form class="orders">
-            <table>
-              <tr>
-                <th class="header" scope="col">Emoji</th>
-                <th class="header" scope="col">Location</th>
-                <th class="header" scope="col">Order</th>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-pizza">🍕</td>
-                <td class="legend-res" id="legend-peps">Sgt. Pepperonis Pizza</td>
-                <td><input class="emoji-input" id="sgt-peps" type="text" name="pizza" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-panda">🐼</td>
-                <td class="legend-res" id="legend-express">Panda Express</td>
-                <td><input class="emoji-input" id="panda" type="text" name="panda" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-chicken">🐔</td>
-                <td class="legend-res" id="legend-fila">Chick-Fila-A</td>
-                <td><input class="emoji-input" id="chicken" type="text" name="chicken" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-burger">🍔</td>
-                <td class="legend-res" id="legend-innout">In-N-Out</td>
-                <td><input class="emoji-input" id="burger" type="text" name="burger" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-burrito">🌯</td>
-                <td class="legend-res" id="legend-chipotle">Chipotle</td>
-                <td><input class="emoji-input" id="burrito" type="text" name="burrito" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-sushi">🍣</td>
-                <td class="legend-res" id="legend-ten">Ten Asian Bistro</td>
-                <td><input class="emoji-input" id="sushi" type="text" name="sushi" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-bento">🍱</td>
-                <td class="legend-res" id="legend-tokio">Tokio Grill</td>
-                <td><input class="emoji-input" id="bento" type="text" name="bento" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-viet">🇻🇳</td>
-                <td class="legend-res" id="legend-pho">Pho Ba Co</td>
-                <td><input class="emoji-input" id="pho" type="text" name="viet" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-heart">❤️</td>
-                <td class="legend-res" id="legend-ikes">Ikes Love &amp; Sandwiches</td>
-                <td><input class="emoji-input" id="heart" type="text" name="heart" value=""></td>
-              </tr>
-              <tr>
-                <td class="legend-emoji" id="legend-pill">💊</td>
-                <td class="legend-res" id="legend-cvs">CVS Pharmacy</td>
-                <td><input class="emoji-input" id="pill" type="text" name="pill" value=""></td>
-              </tr>
-            </table>
-            <input class="save" id="save" type="submit" name="save" disabled="disabled" value="Save">
-          </form>
-        </div>
-        <div class="how-to" id="step-2">
-          <div id="how-2">
-            <ul>
-              <li class="step">Step 2</li>
-              <li>Send a text to your <span>text-to</span> phone number with the following sytax:</li>
-              <li>Order 🍕</li>
-              <li>The <span id="character">second character</span> in the text must be the emoji.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="setup" id="twilio-info">
           <div id="phone-title">
             Your <span id="text-to">text-to</span> number
           </div>
@@ -129,19 +251,10 @@
           </div>
           <div id="generate"></div>
         </div>
-        <div class="how-to" id="step-3">
-          <div id="how-3">
-            <ul>
-              <li class="step">Step 3</li>
-              <li>Receive text delivery updates</li>
-              <li>Answer door.</li>
-              <li>Devour food.</li>
-              <li>Rinse 💦 and repeat.</li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
-    <script src="main.js"></script>
-  </body>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

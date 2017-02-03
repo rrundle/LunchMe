@@ -71,9 +71,8 @@ body {
   position: relative;
 }
 
-.setup {
-  width: 45%;
-  display: inline-block;
+.step {
+  font-size: 1.5em;
 }
 
 .account {
@@ -81,8 +80,8 @@ body {
   margin: auto;
 }
 
-.signup {
-
+form {
+  width: 100%;
 }
 
 input {
@@ -90,9 +89,12 @@ input {
   margin-left: auto;
   margin-right: auto;
   padding: 15px;
-  width: 110%;
   font-size: 1em;
   border-radius: 3px;
+}
+
+.ui.input {
+  margin: 15px;
 }
 
 .login {
@@ -143,6 +145,17 @@ input {
   padding: 15px 0;
 }
 
+#x {
+  position: absolute;
+  font-size: 1em;
+  margin-top: 15px;
+  color: #31373d;
+}
+
+#x:hover {
+  cursor: pointer;
+}
+
 #login-button:hover {
   cursor: pointer;
   border-color: #000;
@@ -155,16 +168,24 @@ input {
 }
 
 #account-info {
-  width: 60%;
+  width: 100%;
   min-width: 390px;
 }
 
+.ui {
+  width: 100%;
+}
+
+.setup-descriptions {
+  margin-left: 30px;
+}
+
 #twilio-info {
-  width: 40%;
+  width: 60%;
   min-width: 390px;
   height: 250px;
-  float: right;
-  display: inline-block;
+  float: left;
+  clear: both;
   border: none;
   margin-top: 12%;
 }
@@ -186,6 +207,14 @@ input {
   font-weight: bold;
   padding: 10px 10px 10px;
   position: relative;
+}
+
+.setup-descriptions {
+  color: #7a7a7a;
+}
+
+tr > td {
+  width: 60%;
 }
 
 #name {
@@ -211,6 +240,10 @@ input {
 #zip{
   float: left;
   clear: left;
+}
+
+table {
+  width: 100%;
 }
 
 input[type=submit]{
@@ -396,7 +429,6 @@ img {
 }
 
 .how-to {
-  display: inline-block;
   width: 31%;
   height: 190px;
   vertical-align: middle;
@@ -433,6 +465,7 @@ li {
 .legend {
   margin-top: 50px;
   float: left;
+  width: 100%;
 }
 
 #email-input {
@@ -482,7 +515,7 @@ li {
 }
 
 .header {
-
+  text-align: left;
 }
 
 .orders {
@@ -493,6 +526,7 @@ li {
   font-size: 2em;
   padding-left: 15px;
   padding-right: 15px;
+  width: 10%;
 }
 
 .legend-res {
@@ -500,6 +534,7 @@ li {
   padding-left: 15px;
   padding-right: 15px;
   font-size: 1.3em;
+  width: 25%;
 }
 
 th {
@@ -535,4 +570,13 @@ th {
 
 #screen-1 {
   margin-left: 27%;
+}
+
+.step-1 {
+  display: inline-block;
+}
+
+.step-3 {
+  display: inline-block;
+  float: left;
 }

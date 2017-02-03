@@ -19,7 +19,7 @@ var connex = require('knex')
 var knex = connex({
   client: 'pg',
   connection: {
-    user: 'ryanrundle',
+    user: 'Ryan',
     database: 'lunch-me'
   }
 })
@@ -212,7 +212,6 @@ app.post('/signup', function(req, res) {
 })
 
 app.post('/email', function(req, res) {
-  console.log(req.body.email)
   var query = knex('users')
     .where({
       email: req.body.email,
@@ -221,7 +220,7 @@ app.post('/email', function(req, res) {
     .returning()
   query
     .then(user => res.json(user))
-    .catch((error) => res.send('Sorry, could not get emails', error))
+    .catch((error) => res.status(error).send('Sorry we couldn\'t get your emails'))
 })
 
 app.post('/preferences', function(req, res) {
@@ -305,13 +304,14 @@ app.get('/number', function(req, res) {
   }, function(err, data) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
-
+/*
     client.incomingPhoneNumbers.create({
       phoneNumber: number.phone_number,
-      SmsUrl: 'https://7a1cd9c1.ngrok.io/sms'
+      SmsUrl: 'https://6ccf751a.ngrok.io'
     }, function(err, purchasedNumber) {
       console.log(purchasedNumber.sid)
     })
+*/
   })
 })
 

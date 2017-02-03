@@ -38,17 +38,24 @@ body {
 
 #company {
   margin: 40px auto 0px auto;
+  width: 369px;;
 }
 
 #logo {
   opacity: 1;
-  width: 28%;
+  width: 40%;
   margin: 50px auto 0px auto;
-  display: block;
   min-width: 240px;
   font-family: Luckiest Guy;
   color: #094aa8;
   font-size: 4em;
+  padding: 0;
+}
+
+#lunch-bag {
+  height: 75px;
+  width: 100px;
+  padding: 0;
 }
 
 #me {
@@ -146,8 +153,8 @@ span {
   box-shadow: 0 0 1px rgba(0,0,0,0);
   display: inline-block;
   margin-top: 50px;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -161,6 +168,11 @@ span {
   animation-timing-function: linear;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.start {
+  width: 150px;
+  margin: auto;
 }
 
 @-webkit-keyframes pulse {
@@ -205,50 +217,41 @@ span {
 #center-phone {
   top: 0px;
   margin: 0px auto;
-  width: 330px;
+  width: 450px;
   position: absolute;
   z-index: 3;
-  left: 0px;
+  left: -30%;
   right: 0px;
 }
 
-#left-phone {
-  width: 310px;
-  left: 23%;
-  transform: translateX(-68%);
-  margin-top: 50px;
-  z-index: 1;
-  position: absolute;
-}
-
 #right-phone {
-  width: 310px;
-  left: 65%;
-  margin-top: 50px;
+  width: 420px;
+  left: 45%;
+  margin-top: 25px;
   z-index: 1;
   position: absolute;
 }
 
 #shadow-left {
   box-shadow: -40px 0px 100px -2px black;
-  left: 28%;
+  left: 16%;
   top: 50px;
   z-index: 2;
   width: 100px;
   height: 600px;
-  margin: 0 auto;
+  margin: 40px auto;
   opacity: .6;
   position: absolute;
 }
 
 #shadow-right {
   box-shadow: 40px 0px 100px -2px black;
-  left: 58%;
+  left: 42%;
   top: 50px;
   z-index: 2;
   width: 100px;
   height: 600px;
-  margin: 0 auto;
+  margin: 40px auto;
   opacity: .6;
   position: absolute;
 }
