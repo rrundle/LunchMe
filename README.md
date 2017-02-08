@@ -14,3 +14,5 @@ AJAX<br>
 REST API<br>
 Knex.js<br>
 PostgreSQL
+
+<img src="http://i.imgur.com/8EhQqzX.png" />
