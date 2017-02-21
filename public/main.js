@@ -22,7 +22,7 @@ function submitForm(event) {
     email: formData.get('email')
   }
 
-  var accountInfo = document.getElementById('account-info')
+  var accountInfo = document.getElementById('account-setup')
 
   var customer = document.createElement('div')
   customer.setAttribute('class', 'user')
@@ -30,9 +30,9 @@ function submitForm(event) {
   var success = document.createElement('div')
   var hand = document.createElement('span')
   hand.setAttribute('class', 'hand shake animated infinite')
-  hand.textContent = '👉'
+  hand.textContent = '👇'
 
-  success.textContent = 'Success! Now generate your unique text-to number '
+  success.textContent = 'Success! Now save your delivery preferences. '
   success.setAttribute('id', 'success')
   success.appendChild(hand)
   customer.appendChild(success)
@@ -66,7 +66,7 @@ function submitForm(event) {
   email.setAttribute('id', 'email-results')
   customer.appendChild(email)
 
-  var account = document.getElementById('account-title')
+  var account = document.getElementById('account-setup')
   account.textContent = ''
 
   accountInfo.appendChild(customer)
@@ -230,7 +230,7 @@ function showUser(user) {
   phone.setAttribute('id', 'phone-results')
   customer.appendChild(phone)
 
-  var account = document.getElementById('account-title')
+  var account = document.getElementById('account-setup')
   account.textContent = ''
 
   accountInfo.appendChild(customer)
@@ -316,7 +316,7 @@ function useValue() {
           var update = document.createElement('span')
           update.setAttribute('id', 'update')
           update.textContent = "Already taken 😳"
-          var title = document.getElementById('account-title')
+          var title = document.getElementById('account-setup')
 
           notify(update, title)
           submit.disabled = true
@@ -325,7 +325,7 @@ function useValue() {
           var proceed = document.createElement('span')
           proceed.setAttribute('id', 'proceed')
           proceed.textContent = "Available 👍"
-          var account = document.getElementById('account-title')
+          var account = document.getElementById('account-setup')
 
           notify(proceed, account)
           submit.disabled = false

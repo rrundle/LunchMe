@@ -1,3 +1,4 @@
+console.log(process.env)
 var express = require('express')
 var app = express()
 
@@ -304,14 +305,13 @@ app.get('/number', function(req, res) {
   }, function(err, data) {
     var number = data.availablePhoneNumbers[0]
     res.json(number.phone_number)
-/*
+
     client.incomingPhoneNumbers.create({
       phoneNumber: number.phone_number,
       SmsUrl: 'https://6ccf751a.ngrok.io'
     }, function(err, purchasedNumber) {
       console.log(purchasedNumber.sid)
     })
-*/
   })
 })
 

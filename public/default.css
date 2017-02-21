@@ -11,7 +11,6 @@ body {
   background: url('http://i.imgur.com/fZqrK1a.jpg') no-repeat center top fixed;
   background-size: cover;
   width: 100%;
-  height: 100%vh;
   margin: 0px;
   top: 0px;
   left: 0px;
@@ -78,6 +77,10 @@ body {
 .account {
   float: left;
   margin: auto;
+}
+
+#account-setup {
+  margin: 15px 0 20px;
 }
 
 form {
@@ -181,20 +184,22 @@ input {
 }
 
 #twilio-info {
-  width: 60%;
+  width: 100%;
   min-width: 390px;
-  height: 250px;
-  float: left;
+  height: 400px;
   clear: both;
   border: none;
-  margin-top: 12%;
+  margin-top: 5%;
+}
+
+#twilio-setup {
+  margin: 15px 0 20px;
 }
 
 #phone-title {
-  text-align: center;
   font-size: 2em;
   font-weight: 100;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 #text-to {
@@ -288,7 +293,6 @@ margin-bottom: 20px;
   height: 60px;
   margin: 0 auto;
   transform: translateY(-50%);
-  width: 370px;
   margin: auto;
 }
 
@@ -335,21 +339,23 @@ margin-bottom: 20px;
 #update {
   width: 175px;
   height: 30px;
-  margin-left: 55%;
-  margin-top: 15px;
+  margin-left: 40%;
+  margin-bottom: 10px;
   color: #cf0814;
-  font-size: .85em;
+  font-size: 1em;
   position: absolute;
+  font-weight: bold;
 }
 
 #proceed {
   width: 175px;
   height: 30px;
-  margin-left: 55%;
-  margin-top: 15px;
+  margin-left: 40%;
+  margin-bottom: 10px;
   color: #3bbf3e;
-  font-size: .85em;
+  font-size: 1em;
   position: absolute;
+  font-weight: bold;
 }
 
 .shape {
@@ -358,7 +364,7 @@ margin-bottom: 20px;
   stroke-dashoffset: -474;
   stroke-width: 8px;
   stroke: #094aa8;
-  visibility: hidden;
+  width: 320px;
 }
 
 .text {
@@ -366,7 +372,9 @@ margin-bottom: 20px;
   letter-spacing: 8px;
   line-height: 32px;
   text-align: center;
-  top: -48px;
+  top: -50px;
+  width: 320px;
+  position: relative;
 }
 
 .svg-wrapper {
@@ -375,6 +383,10 @@ margin-bottom: 20px;
   position: relative;
   top: 5%;
   transform: translateY(-50%);
+  width: 320px;
+}
+
+svg {
   width: 320px;
 }
 
@@ -397,8 +409,11 @@ margin-bottom: 20px;
 }
 
 #phone-text {
-  font-size: 2.5em;
+  font-size: 1.7em;
   font-weight: lighter;
+  margin-bottom: 50px;
+  height: 60px;
+  width: 320px;
 }
 
 #phone-text:hover {
@@ -463,7 +478,7 @@ li {
 }
 
 .legend {
-  margin-top: 50px;
+  margin-top: 5%;
   float: left;
   width: 100%;
 }
@@ -512,6 +527,10 @@ li {
 
 .emoji-input {
   width: 350%;
+}
+
+#emoji-setup {
+  margin: 15px 0 20px;
 }
 
 .header {
@@ -579,4 +598,12 @@ th {
 .step-3 {
   display: inline-block;
   float: left;
+}
+
+#footer {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0px;
+  margin-top: 50px;
 }
